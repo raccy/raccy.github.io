@@ -34,7 +34,7 @@ GEM
     erubis (2.7.0)
     eventmachine (1.0.3)
     execjs (2.2.1)
-    ffi (1.9.5)
+    ffi (1.9.6)
     haml (4.0.5)
       tilt
     hike (1.2.3)
@@ -126,7 +126,7 @@ GEM
       hitimes
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
-    uber (0.0.8)
+    uber (0.0.9)
     uglifier (2.5.3)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
@@ -137,6 +137,7 @@ PLATFORMS
 DEPENDENCIES
   bootstrap-sass
   jquery-middleman
+  kramdown
   middleman (~> 3.3.6)
   middleman-livereload (~> 3.1.0)
   middleman-minify-html

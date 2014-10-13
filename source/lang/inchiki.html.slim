@@ -1,0 +1,11 @@
+---
+title: インチキプログラム言語解説
+---
+h1 = current_page.data.title
+h2 はじめに
+p どんなプログラミング言語を学べばいいかわからないっていうプログラム言語初心者向けに作りました。
+p 作者の独断と偏見に基づいているため、本気にしないでね。
+
+- part_dirname = File.join(File.dirname(current_page.path), File.basename(current_page.path, ".*"))
+
+== partial File.join(part_dirname, "c")

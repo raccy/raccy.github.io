@@ -19,4 +19,6 @@ gem "jquery-middleman"
 
 gem "slim"
 
+gem "kramdown"
+
 gem 'middleman-minify-html'
