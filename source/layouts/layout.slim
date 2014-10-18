@@ -7,5 +7,14 @@ html
     == stylesheet_link_tag "all"
     == javascript_include_tag "all"
   body class = page_classes
-    .container
-      == yield
+    header
+      == partial "layouts/header"
+    main
+      .container
+        == yield
+    footer
+      == partial "layouts/footer"
+
+    / = __FILE__
+    / br
+    / = File.dirname(current_page.path)
