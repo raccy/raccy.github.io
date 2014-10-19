@@ -1,0 +1,1 @@
+../../../../code/hello/typescript/run.sh

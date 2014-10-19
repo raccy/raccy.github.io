@@ -1,0 +1,71 @@
+require "cgi"
+require "pathname"
+require "fileutils"
+
+class SourceCode < Middleman::Extension
+  option :code_dir, "code", 'Location of soruce codes'
+  option :code_suffix, ".txt", 'Suffix for code on web'
+
+  def initialize(app, options_hash={}, &block)
+    super
+  end
+
+  helpers do
+    def code_download_link_tag(path, text = nil)
+      real_path = CGI.escape(File.join(http_prefix, path + options.code_suffix))
+      file_name = CGI.escape_html(File.basenam(path))
+      text ||= file_name
+      return "<a href='#{real_path}' download='#{file_name}}'>#{text}</a>"
+    end
+
+    def code_print(path)
+      code = IO.read(path, encoding: "UTF-8")
+      return "<code>#{CGI.escape_html(code)}</code>"
+    end
+  end
+
+  def before_build
+    src = options.code_dir
+    dst = File.join(app.settings.source, options.code_dir)
+    sync_symlink(src, dst)
+  end
+
+  def sync_symlink(src, dst)
+    warn "sync: #{src} to #{dst}"
+    if FileTest.file?(src)
+      dst = dst + options.code_suffix
+      link_name = Pathname.new(src).
+          relative_path_from(Pathname.new(dst).dirname).to_s
+      if FileTest.exist?(dst)
+        if FileTest.symlink?(dst)
+          if File.readlink(dst) != link_name
+            warn "link: #{dst} to #{link_name}"
+            FileUtils.symlink(link_name, dst, force: true)
+          end
+        else
+          raise "File exist, but not symlink: #{dst}"
+        end
+      else
+        warn "link: #{dst} to #{link_name}"
+        FileUtils.symlink(link_name, dst)
+      end
+    elsif FileTest.directory?(src)
+      unless FileTest.directory?(dst)
+        warn "mkdir: #{dst}"
+        FileUtils.mkdir(dst)
+      end
+      Dir.foreach(src) do |e|
+        if e == "." || e == ".."
+          next
+        end
+        child_src = File.join(src, e)
+        child_dst = File.join(dst, e)
+        sync_symlink(child_src, child_dst)
+      end
+      # TODO: cleanup?
+    end
+    return true
+  end
+end
+
+::Middleman::Extensions.register(:source_code, SourceCode)

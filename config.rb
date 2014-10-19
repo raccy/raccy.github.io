@@ -1,6 +1,7 @@
 ###
 # Requires
 ###
+require "lib/source_code"
 
 ###
 # Compass
@@ -62,7 +63,7 @@ set :build_dir, '../raccy.github.io'
 set :markdown_engine, :kramdown
 Slim::Engine.disable_option_validator!
 
-ignore "/codes/*"
+activate :source_code, code_dir: 'code'
 
 # Build-specific configuration
 configure :build do
