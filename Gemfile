@@ -13,7 +13,8 @@ gem "wdm", "~> 0.1.0", :platforms => [:mswin, :mingw]
 # Windows does not come with time zone data
 gem "tzinfo-data", platforms: [:mswin, :mingw]
 
-gem "bootstrap-sass"
+# Add modules
+gem "bootstrap-sass", :require => false
 
 gem "jquery-middleman"
 
@@ -21,4 +22,4 @@ gem "slim"
 
 gem "kramdown"
 
-gem 'middleman-minify-html'
+gem "middleman-minify-html"

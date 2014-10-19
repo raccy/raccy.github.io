@@ -6,6 +6,9 @@ html
     title = current_page.data.title || "raccy.github.io"
     == stylesheet_link_tag "all"
     == javascript_include_tag "all"
+    /![if lt IE 9]
+    == javascript_include_tag "html5shiv"
+    /![endif]
   body class = page_classes
     header
       == partial "layouts/header"
@@ -14,7 +17,3 @@ html
         == yield
     footer
       == partial "layouts/footer"
-
-    / = __FILE__
-    / br
-    / = File.dirname(current_page.path)

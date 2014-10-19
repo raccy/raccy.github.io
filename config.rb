@@ -1,4 +1,8 @@
 ###
+# Requires
+###
+
+###
 # Compass
 ###
 
@@ -36,9 +40,9 @@
 # activate :automatic_image_sizes
 
 # Reload the browser automatically whenever files change
-# configure :development do
-#   activate :livereload
-# end
+configure :development do
+  activate :livereload
+end
 
 # Methods defined in the helpers block are available in templates
 # helpers do
@@ -56,6 +60,9 @@ set :images_dir, 'images'
 set :build_dir, '../raccy.github.io'
 
 set :markdown_engine, :kramdown
+Slim::Engine.disable_option_validator!
+
+ignore "/codes/*"
 
 # Build-specific configuration
 configure :build do
@@ -64,6 +71,8 @@ configure :build do
 
   # Minify Javascript on build
   activate :minify_javascript
+
+  activate :minify_html
 
   # Enable cache buster
   # activate :asset_hash
@@ -74,5 +83,4 @@ configure :build do
   # Or use a different image path
   # set :http_prefix, "/Content/images/"
 
-  activate :livereload
 end
