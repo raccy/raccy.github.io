@@ -63,7 +63,7 @@ set :build_dir, '../raccy.github.io'
 set :markdown_engine, :kramdown
 Slim::Engine.disable_option_validator!
 
-activate :source_code, code_dir: 'code'
+activate :source_code
 
 # Build-specific configuration
 configure :build do

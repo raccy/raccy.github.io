@@ -3,6 +3,7 @@ html
   head
     meta charset="utf-8"
     meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"
+    meta name="viewport" content="width=device-width, initial-scale=1"
     title = current_page.data.title || "raccy.github.io"
     == stylesheet_link_tag "all"
     == javascript_include_tag "all"
@@ -11,9 +12,12 @@ html
     /![endif]
   body class = page_classes
     header
-      == partial "layouts/header"
+      .container
+        == partial "layouts/header"
     main
       .container
         == yield
     footer
-      == partial "layouts/footer"
+      hr
+      .container
+        == partial "layouts/footer"
