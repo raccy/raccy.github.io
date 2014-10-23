@@ -11,16 +11,20 @@ class SourceCode < Middleman::Extension
 
   helpers do
     def code_download_link_tag(path, text = nil)
-      real_path = CGI.escape(File.join(http_prefix,
-          path + app.settings.code_suffix))
-      file_name = CGI.escape_html(File.basenam(path))
+      url = code_url(path)
+      file_name = CGI.escape_html(File.basename(path))
       text ||= file_name
-      return "<a href='#{real_path}' download='#{file_name}}'>#{text}</a>"
+      return "<a href='#{url}' download='#{file_name}'>#{text}</a>"
     end
 
     def code_print(path)
-      code = IO.read(path, encoding: "UTF-8")
-      return "<code>#{CGI.escape_html(code)}</code>"
+      code = IO.read(File.join(code_dir, path), encoding: "UTF-8")
+      return code
+    end
+
+    def code_url(path)
+      url = File.join(http_prefix, code_dir, path + code_suffix)
+      return url
     end
   end
 

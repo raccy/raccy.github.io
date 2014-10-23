@@ -61,6 +61,9 @@ set :images_dir, 'images'
 set :build_dir, '../raccy.github.io'
 
 set :markdown_engine, :kramdown
+
+set :slim, pretty: true, sort_attrs: false, format: :html5,
+    disable_escape: false
 Slim::Engine.disable_option_validator!
 
 activate :source_code
