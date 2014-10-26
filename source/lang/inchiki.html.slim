@@ -1,9 +1,9 @@
 ---
 title: インチキプログラム言語解説
 ---
-- page_name = File.basename(current_page.path, ".*")
-- part_dirname = File.join(File.dirname(current_page.path), page_name)
-- part_dirname_path = File.join(settings.source, part_dirname)
+/- page_name = File.basename(current_page.path, ".*")
+/- part_dirname = File.join(File.dirname(current_page.path), page_name)
+/- part_dirname_path = File.join(settings.source, part_dirname)
 h2 はじめに
 p
   | どんなプログラミング言語を学べばいいかわからないっていうプログラム言語初心者向けに作りました。作者の独断と偏見に基づいているため、本気にしないでね。
@@ -15,14 +15,14 @@ p
 p
   | RやTransact-SQLなどは特定用途向けの言語、Delphiなどの有償ソフトが必要な言語、VisualBasicなどのWindows専用言語は省いています。
 h2 言語解説
-- Dir.foreach(part_dirname_path) do |e|
-  - if e =~ /_(.*)\.md$/
-    - name = $1
-    .panel.panel-default
-      .panel-heading
-        h3.panel-title = name
-      .panel-body
-        == partial File.join(part_dirname, name)
+/- Dir.foreach(part_dirname_path) do |e|
+/  - if e =~ /_(.*)\.md$/
+/    - name = $1
+/    .panel.panel-default
+/      .panel-heading
+/        h3.panel-title = name
+/      .panel-body
+/        == partial File.join(part_dirname, name)
 h2 総評
 p
   | TIOBEのランキングを見るとRubyが10位圏内から脱落していますが、他のランキングではPythonに次ぐ人気を誇っています。いつまでたってもPythonを抜けませんが。Ruby on Railsの人気に衰えが見えない事を考えると、単にRailsって書く人が多すぎるのかもしれません。

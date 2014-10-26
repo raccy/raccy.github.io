@@ -1,3 +1,3 @@
 import Foundation
 
-println("こんにちは世界！")
+println("こんにちは、世界！")

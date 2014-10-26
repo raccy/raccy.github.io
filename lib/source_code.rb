@@ -28,7 +28,7 @@ class SourceCode < Middleman::Extension
     end
   end
 
-  def before_build
+  def after_configuration
     src = app.settings.code_dir
     dst = File.join(app.settings.source, app.settings.code_dir)
     sync_symlink(src, dst)

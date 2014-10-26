@@ -60,11 +60,15 @@ set :images_dir, 'images'
 
 set :build_dir, '../raccy.github.io'
 
+set :partials_dir, 'partials'
+
 set :markdown_engine, :kramdown
 
 set :slim, pretty: true, sort_attrs: false, format: :html5,
     disable_escape: false
 Slim::Engine.disable_option_validator!
+
+page "/lang/*", :layout => "lang"
 
 activate :source_code
 

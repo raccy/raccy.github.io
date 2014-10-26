@@ -1,1 +1,1 @@
-process.stdout.write("こんにちは世界！\n")
+process.stdout.write("こんにちは、世界！\n")

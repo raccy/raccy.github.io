@@ -1,24 +1,17 @@
 ---
-title: こんにちは世界！
+title: こんにちは、世界！
 ---
-- page_name = File.basename(current_page.path, ".*")
-- lang_list = {}
-- page_code_dir = File.join(code_dir, page_name)
-- Dir.foreach(page_code_dir) do |e|
-  - next if e == "." || e == ".."
-  - lang_code_dir = File.join(page_code_dir, e)
-  - if FileTest.directory?(lang_code_dir)
-    - path_list = {}
-    - Dir.foreach(lang_code_dir) do |f|
-      - next if f == "." || f == ".."
-      - path_list[f] = code_url(File.join(page_name, e, f))
-    - lang_list[e] = [data.lang[e], path_list]
+h2 概要
+p
+  | 古典「K&R」から続く伝統として、一番最初のプログラムは「Hello, world!」と印字しなければなりません。ということで、日本語で表示するソースを各言語について紹介します。
+p
+  | 各言語の例文にある「run.sh」は実行のシェルスクリプトです。WindowsではMSYSやCygwin上で動かしてください。コマンドが見つからない場合はコンパイラやインタプリタがインストールされていません。ChocolateyやHomebrew、apt-getなどで各自いれてください。
 h2 要件
 ul
   li
     p 下記の指定の文字列を標準出力に出力する。
     pre
-      code こんにちは世界！
+      code こんにちは、世界！
   li
     p 標準出力に文字列を出力した後に、改行を行う。
   li
@@ -28,21 +21,15 @@ ul
   li
     p ソースコードのエンコードはUTF-8とする。
 h2 ソースコード
-/ 言語選択
-.btn-group
-  button.btn.btn-default#lang-name type="button" 言語を選択してください
-  button.btn.btn-default.dropdown-toggle type="button" data-toggle="dropdown"
-    span.caret
-    span.sr-only Toggle Dropdown
-  ul.dropdown-menu role="menu"
-    - lang_list.each do |lang_name, path_list|
-      li
-        == link_to data.lang[lang_name], "\#lang-name", id: "lang-select-#{lang_name}"
-#lang-code
+== partial "langcode"
+h2 解説
+p
+  | そもそも標準出力に印字と言っても、簡単にかける言語と冗長な表現になる言語があるのがわかると思います。これは各言語が得意としている分野が異なるからです。例えば、PHPに関しては、次のように書くこともできます。
+pre
+  code
+    | こんにちは、世界！
 
-== javascript_include_tag "langcode"
-script
-  | $(function(){
-  == "var langList = #{JSON.generate(lang_list)};"
-  == "langSelecter(langList);"
-  | });
+p
+  | PHPはWebでのHTML出力を意識して作成された言語のため、出力に関しては最も簡単にできるようになっています。対して、Objective-Cは標準出力をファイルをアクセスと同等と扱い、やや冗長な書き方になっています。ただし、Objective-CはCのスーパーセットのため、Cと同じように書くこともできますので、あえて特別なオブジェクトを用意していないのかもしれません。
+p
+  | このように言語には得意不得意があります。どの言語が一番優れているとか、そういうものはありません。ソフトウェアの規模、動作する環境、実際の用途、便利なフレームワークがあるかどうか、などを鑑みて言語選択すべきます。

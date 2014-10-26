@@ -35,7 +35,14 @@
         """
     $.get path, {filename: filename}, (data) ->
       fn = @.url.split("?")[1].split("=")[1]
-      code_src = "<pre><code>" + escapeHTML(data) + "</code></pre>"
-      $("\##{idCodeFileName(fn)}").html(code_src)
+      suffix = fn.split(".")[1]
+      code_src = "<pre><code class =\"#{suffix}\">" + escapeHTML(data) +
+          "</code></pre>"
+      # delay test
+      setTimeout ->
+        $("\##{idCodeFileName(fn)}").html(code_src)
+        $("\##{idCodeFileName(fn)} pre code").each (i, block) ->
+          hljs.highlightBlock(block)
+      , 10000
   html_src += "</div>"
   $("#lang-code").html(html_src)

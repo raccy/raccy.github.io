@@ -1,0 +1,34 @@
+/ ソースコード表示 partial
+/ require jQuery.js highlight.js
+/ ページ用のコードを探し、リスト化する。
+- page_name = File.basename(current_page.path, ".*")
+- page_code_dir = File.join(code_dir, page_name)
+- lang_list = {}
+- Dir.foreach(page_code_dir) do |e|
+  - next if e == "." || e == ".."
+  - lang_code_dir = File.join(page_code_dir, e)
+  - if FileTest.directory?(lang_code_dir)
+    - path_list = {}
+    - Dir.foreach(lang_code_dir) do |f|
+      - next if f == "." || f == ".."
+      - path_list[f] = code_url(File.join(page_name, e, f))
+    - lang_list[e] = [data.lang[e], path_list]
+.btn-group
+  button.btn.btn-default#lang-name type="button" data-loading-text="Loading..."
+    | 言語リスト
+  button.btn.btn-default.dropdown-toggle type="button" data-toggle="dropdown"
+    span.caret
+    span.sr-only Toggle Dropdown
+  ul.dropdown-menu role="menu"
+    - lang_list.each do |lang_name, path_list|
+      li
+        == link_to data.lang[lang_name], "\#lang-name", id: "lang-select-#{lang_name}"
+#lang-code
+  p 上の言語リストから表示したい言語を選択してください。
+/ ソースコード表示JavaScriptを読込
+== javascript_include_tag "langcode"
+script
+  | $(function(){
+  == "var langList = #{JSON.generate(lang_list)};"
+  == "langSelecter(langList);"
+  | });

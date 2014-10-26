@@ -1,0 +1,8 @@
+- html: index
+  title: 偽説プログラミング大全
+  pages:
+    - html: null
+      title: プログラム言語の基礎
+      pages:
+        - html: hello
+          title: こんにちは、世界！

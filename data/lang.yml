@@ -4,6 +4,7 @@ coffeescript: CoffeeScript
 commonlisp: Common Lisp
 cplusplus: C++
 csharp: C#
+d: D
 dart: Dart
 erlang: Erlang
 haskell: Haskell
