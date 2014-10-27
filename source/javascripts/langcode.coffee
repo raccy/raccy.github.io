@@ -1,19 +1,16 @@
 # jQuery required
 # paths = {name0: path0, name1: path1, ...}
-@escapeHTML = (str) ->
+loadingFiles = 0
+
+escapeHTML = (str) ->
   return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
-@langSelecter = (langList) ->
-  for k, v of langList
-    $("\#lang-select-#{k}").click ->
-      langCode = $(@).attr("id").replace("lang-select-", "")
-      selectLang(langList[langCode][0], langList[langCode][1])
-
-@idCodeFileName = (filename) ->
+idCodeFileName = (filename) ->
   return "code-file-" + filename.replace(".", "_")
 
-@selectLang = (langName, pathList) ->
-  $("#lang-name").html(langName)
+selectLang = (langName, pathList) ->
+  $("#lang-name").html("#{langName}<span class=\"caret\"></span>")
+  $("#lang-name").button("loading")
   html_src = "<div class=\"panel panel-group\">"
   for filename, path of pathList
     html_src += """
@@ -43,6 +40,12 @@
         $("\##{idCodeFileName(fn)}").html(code_src)
         $("\##{idCodeFileName(fn)} pre code").each (i, block) ->
           hljs.highlightBlock(block)
-      , 10000
+      , 1000
   html_src += "</div>"
   $("#lang-code").html(html_src)
+
+@langSelecter = (langList) ->
+  for k, v of langList
+    $("\#lang-link-#{k}").click ->
+      langCode = $(@).attr("id").replace("lang-link-", "")
+      selectLang(langList[langCode][0], langList[langCode][1])

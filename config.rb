@@ -1,7 +1,7 @@
 ###
 # Requires
 ###
-require "lib/source_code"
+require "lib/lang_code"
 
 ###
 # Compass
@@ -70,7 +70,7 @@ Slim::Engine.disable_option_validator!
 
 page "/lang/*", :layout => "lang"
 
-activate :source_code
+activate :lang_code
 
 # Build-specific configuration
 configure :build do

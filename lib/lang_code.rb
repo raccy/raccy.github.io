@@ -2,7 +2,7 @@ require "cgi"
 require "pathname"
 require "fileutils"
 
-class SourceCode < Middleman::Extension
+class LangCode < Middleman::Extension
   def initialize(app, options_hash={}, &block)
     super
     app.set :code_dir, "code"
@@ -25,6 +25,39 @@ class SourceCode < Middleman::Extension
     def code_url(path)
       url = File.join(http_prefix, code_dir, path + code_suffix)
       return url
+    end
+
+    def code_file_search(code_name, path)
+      full_path = File.join(code_dir, code_name, path)
+      list = {}
+      if FileTest.directory?(full_path)
+        Dir.foreach(full_path) do |e|
+          next if e == "." || e == ".."
+          if path == "."
+            child_path = e
+          else
+            child_path = File.join(path, e)
+          end
+          list.update(code_file_search(code_name, child_path))
+        end
+        return list
+      elsif FileTest.file?(full_path)
+        list[path] = code_url(File.join(code_name, path))
+      end
+      return list
+    end
+
+    def code_list(name)
+      parent_code_path = File.join(code_dir, name)
+      lang_list = {}
+      Dir.foreach(parent_code_path) do |e|
+        next if e == "." || e == ".."
+        if FileTest.directory?(File.join(parent_code_path, e))
+          path_list = code_file_search(File.join(name, e), ".")
+          lang_list[e] = [data.lang[e], path_list]
+        end
+      end
+      return lang_list
     end
   end
 
@@ -71,4 +104,4 @@ class SourceCode < Middleman::Extension
   end
 end
 
-::Middleman::Extensions.register(:source_code, SourceCode)
+::Middleman::Extensions.register(:lang_code, LangCode)
