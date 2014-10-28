@@ -22,7 +22,9 @@ class LangCode
     langName = @langList[code][0]
     pathList = @langList[code][1]
     $("#lang-name").html("#{langName}<span class=\"caret\"></span>")
-    $("#lang-name").button("loading")
+    # if loading is enbaled, $("#lang-name")'s contents are fixed!!!
+    # maybe bootstrap bug?
+    #$("#lang-name").button("loading")
     html_src = "<div class=\"panel panel-group\">"
     @loadingFiles = 0
     for filename, path of pathList
@@ -38,7 +40,7 @@ class LangCode
                 </a>
               </h3>
             </div>
-            <div class=\"panel-body panel-code\"
+            <div class=\"panel-body\"
                 id=\"#{LangCode.idCodeFileName(filename)}\">
               読み込み中・・・
             </div>
@@ -52,13 +54,14 @@ class LangCode
             "</code></pre>"
         # delay test
         setTimeout ->
+          $("\##{LangCode.idCodeFileName(name)}").addClass("panel-code")
           $("\##{LangCode.idCodeFileName(name)}").html(code_src)
           $("\##{LangCode.idCodeFileName(name)} pre code").each (i, block) ->
             hljs.highlightBlock(block)
           langCode.loadingFiles -= 1
-          if langCode.loadingFiles == 0
-            $("#lang-name").button("reset")
-        , 1000
+          #if langCode.loadingFiles == 0
+            #$("#lang-name").button("reset")
+        , 0
     html_src += "</div>"
     $("#lang-code").html(html_src)
 
