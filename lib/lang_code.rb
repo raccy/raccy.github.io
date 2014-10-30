@@ -61,6 +61,7 @@ class LangCode < Middleman::Extension
     end
   end
 
+  # TODO: not need make symlink and use proxy?
   def after_configuration
     src = app.settings.code_dir
     dst = File.join(app.settings.source, app.settings.code_dir)

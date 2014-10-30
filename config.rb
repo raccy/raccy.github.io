@@ -70,6 +70,8 @@ Slim::Engine.disable_option_validator!
 
 page "/lang/*", :layout => "lang"
 
+page "/plain/*", :layout => "plain"
+
 activate :lang_code
 
 # Build-specific configuration

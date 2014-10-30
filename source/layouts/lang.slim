@@ -17,9 +17,13 @@ html
     header
       .container
         == partial "header"
-    main
-      .container
-        == yield
+    .container
+      .row
+        .col-md-3
+          == partial "lang-navi"
+        .col-md-9
+          main
+            == yield
     footer
       hr
       .container

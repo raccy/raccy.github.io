@@ -1,18 +1,7 @@
 / ソースコード表示 partial
 / require jQuery.js highlight.js lang-code.js lang_code.rb
 / ページ用のコードを探し、リスト化する。
-- page_name = File.basename(current_page.path, ".*")
-- page_code_dir = File.join(code_dir, page_name)
-- lang_list = code_list(page_name)
-/ - Dir.foreach(page_code_dir) do |e|
-/  - next if e == "." || e == ".."
-/  - lang_code_dir = File.join(page_code_dir, e)
-/  - if FileTest.directory?(lang_code_dir)
-/    - path_list = {}
-/    - Dir.foreach(lang_code_dir) do |f|
-/      - next if f == "." || f == ".."
-/      - path_list[f] = code_url(File.join(page_name, e, f))
-/    - lang_list[e] = [data.lang[e], path_list]
+- lang_list = code_list(File.basename(current_page.path, ".*"))
 .btn-group
   button.btn.btn-default.dropdown-toggle#lang-name type="button" data-toggle="dropdown" data-loading-text="読み込み中・・・"
     | 言語リスト
