@@ -8,8 +8,8 @@ class LangCode < Middleman::Extension
 
   def initialize(app, options_hash={}, &block)
     super
-    app.set :code_dir, "code"
-    app.set :code_suffix, ".txt"
+    #app.set :code_dir, "code"
+    #app.set :code_suffix, ".txt"
   end
 
   helpers do
@@ -21,12 +21,12 @@ class LangCode < Middleman::Extension
     end
 
     def code_print(path)
-      code = IO.read(File.join(code_dir, path), encoding: "UTF-8")
+      code = IO.read(File.join(extensions[:lang_code].options.code_dir, path), encoding: "UTF-8")
       return code
     end
 
     def code_url(path)
-      url = File.join(http_prefix, code_dir, path + code_suffix)
+      url = File.join(http_prefix, extensions[:lang_code].options.code_dir, path + extensions[:lang_code].options.code_suffix)
       return url
     end
 
@@ -51,7 +51,7 @@ class LangCode < Middleman::Extension
     end
 
     def code_list(name)
-      parent_code_path = File.join(code_dir, name)
+      parent_code_path = File.join(extensions[:lang_code].options.code_dir, name)
       lang_list = {}
       Dir.foreach(parent_code_path) do |e|
         next if e == "." || e == ".."
@@ -89,6 +89,7 @@ class LangCode < Middleman::Extension
     end
   end
 
+=begin
   # TODO: not need make symlink and use proxy?
   def after_configuration
     #src = app.settings.code_dir
@@ -131,6 +132,8 @@ class LangCode < Middleman::Extension
     end
     return true
   end
+=end
+
 end
 
 ::Middleman::Extensions.register(:lang_code, LangCode)
