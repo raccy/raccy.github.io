@@ -64,8 +64,8 @@ set :partials_dir, 'partials'
 
 set :markdown_engine, :kramdown
 
-set :slim, pretty: true, sort_attrs: false, format: :html5,
-    disable_escape: false
+set :slim,
+    pretty: true, sort_attrs: false, format: :html5, disable_escape: false
 Slim::Engine.disable_option_validator!
 
 page "/lang/*", :layout => "lang"
@@ -73,6 +73,11 @@ page "/lang/*", :layout => "lang"
 page "/plain/*", :layout => "plain"
 
 activate :lang_code
+
+extensions[:lang_code].all_code_list.each do |code_path|
+  proxy "/code/#{code_path}.txt", "/code/lang.text",
+      locals: {code_path: code_path}, ignore: true
+end
 
 # Build-specific configuration
 configure :build do

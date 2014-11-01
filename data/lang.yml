@@ -9,7 +9,7 @@ dart: Dart
 delphi: Delphi
 erlang: Erlang
 go: Go
-fortran: Fortran
+fortran: FORTRAN
 freepascal: Free Pascal
 fsharp: F#
 haskell: Haskell
@@ -30,3 +30,24 @@ smalltalk: Smalltalk
 swift: Swift
 typescript: TypeScript
 vbnet: Visual Basic .NET
+jscript: JScript
+vbscript: VBScript
+vba: Visual Basic for Applications
+powershell: PowerShell
+sh: Borune Shell
+bash: Bourne-Again SHell
+csh: C Shell
+ksh: Korn Shell
+tcsh: tcsh
+zsh: Z shell
+dash: Debian Almquist shell
+b: B
+cobol: COBOL
+ada: Ada
+algol: ALGOL
+basic: BASIC
+assembly: Assembly
+lua: Lua
+freebasic: Free BASIC
+plsql: PL/SQL
+tcl: Tcl

@@ -1,1 +1,0 @@
-../../../../code/hello/coffeescript/run.sh

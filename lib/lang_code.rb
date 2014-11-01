@@ -3,6 +3,9 @@ require "pathname"
 require "fileutils"
 
 class LangCode < Middleman::Extension
+  option :code_dir, "code", "Direcotry inlude Language codes"
+  option :code_suffix, ".txt", "Code file's suffix"
+
   def initialize(app, options_hash={}, &block)
     super
     app.set :code_dir, "code"
@@ -28,7 +31,7 @@ class LangCode < Middleman::Extension
     end
 
     def code_file_search(code_name, path)
-      full_path = File.join(code_dir, code_name, path)
+      full_path = File.join(extensions[:lang_code].options.code_dir, code_name, path)
       list = {}
       if FileTest.directory?(full_path)
         Dir.foreach(full_path) do |e|
@@ -61,11 +64,36 @@ class LangCode < Middleman::Extension
     end
   end
 
+  def all_code_list()
+    list = []
+    Dir.foreach(options.code_dir) do |e|
+      next if e == "." || e == ".."
+      list.concat(file_search(options.code_dir, e))
+    end
+    return list
+  end
+
+  def file_search(parrent, name)
+    path = File.join(parrent, name)
+    if FileTest.directory?(path)
+      list = []
+      Dir.foreach(path) do |e|
+        next if e == "." || e == ".."
+        list.concat(file_search(parrent, File.join(name, e)))
+      end
+      return list
+    elsif FileTest.file?(path)
+      return [name]
+    else
+      return []
+    end
+  end
+
   # TODO: not need make symlink and use proxy?
   def after_configuration
-    src = app.settings.code_dir
-    dst = File.join(app.settings.source, app.settings.code_dir)
-    sync_symlink(src, dst)
+    #src = app.settings.code_dir
+    #dst = File.join(app.settings.source, app.settings.code_dir)
+    #sync_symlink(src, dst)
   end
 
   def sync_symlink(src, dst)

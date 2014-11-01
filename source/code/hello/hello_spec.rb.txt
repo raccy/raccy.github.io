@@ -1,1 +1,0 @@
-../../../code/hello/hello_spec.rb

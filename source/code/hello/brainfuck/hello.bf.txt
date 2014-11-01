@@ -1,1 +1,0 @@
-../../../../code/hello/brainfuck/hello.bf
