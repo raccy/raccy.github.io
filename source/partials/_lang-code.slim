@@ -2,12 +2,9 @@
 / require jQuery.js highlight.js lang-code.js lang_code.rb
 / ページ用のコードを探し、リスト化する。
 - require "pathname"
-- warn File.dirname(current_page.path)
-- warn File.join("lang")
 - current_page_name = Pathname.new(File.dirname(current_page.path)). \
       relative_path_from(Pathname.new("lang")). \
       join(File.basename(current_page.path, ".*"))
-- warn current_page_name
 - lang_list = code_list(current_page_name)
 -
 .btn-group

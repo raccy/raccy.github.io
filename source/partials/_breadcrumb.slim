@@ -1,0 +1,21 @@
+/ リストを作成
+- breadcrumb_list = []
+- breadcrumb_list << { title:current_resource.data.title,
+      url: current_resource.url,
+      active: true }
+- resource = current_resource
+- while resource = resource.parent
+  / トップは出さない
+  - break if resource.url == http_prefix
+  - breadcrumb_list << { title:resource.data.title,
+      url: resource.url,
+      active: false }
+
+ol.breadcrumb
+  - breadcrumb_list.reverse.each do |bread|
+    - if bread[:active]
+      li.active
+        = bread[:title]
+    - else
+      li
+        == link_to bread[:title], bread[:url]

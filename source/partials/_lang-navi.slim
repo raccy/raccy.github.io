@@ -1,26 +1,4 @@
 nav.lang-navi-sidebar
   h4 目次
   ul.nav.nav-pills.nav-stacked role="tablist"
-    - data.lang_contents.each do |content|
-      - content_li_class = nil
-      - if content.html
-        - if content.html == File.basename(current_page.path)
-          - content_li_class = "active"
-      - else
-        - content_li_class = "disabled"
-      == content_tag :li, class: content_li_class do
-        == link_to content.title,
-            (content.html && File.join(http_prefix, "lang", content.html))
-        - if content.pages && (! content.pages.empty?)
-          ul.nav.nav-pills.nav-stacked role="tablist"
-            - content.pages.each do |subcontent|
-              - subcontent_li_class = nil
-              - if subcontent.html
-                - if subcontent.html == File.basename(current_page.path)
-                  - subcontent_li_class = "active"
-              - else
-                - subcontent_li_class = "disabled"
-              == content_tag :li, class: subcontent_li_class do
-                == link_to subcontent.title,
-                    (subcontent.html && File.join(http_prefix,
-                        "lang", subcontent.html))
+    == lang_navi_menu(sitemap.find_resource_by_path("lang/index.html"))

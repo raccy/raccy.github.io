@@ -2,6 +2,7 @@
 # Requires
 ###
 require "lib/lang_code"
+require "lib/navi_menu"
 
 ###
 # Compass
@@ -73,6 +74,7 @@ page "/lang/*", :layout => "lang"
 page "/plain/*", :layout => "plain"
 
 activate :lang_code
+activate :navi_menu
 
 extensions[:lang_code].all_code_list.each do |code_path|
   proxy "/code/#{code_path}.txt", "/code/lang.text",
