@@ -1,0 +1,607 @@
+---
+title: 整数型
+order: 1
+head:
+  - key: name
+    title: 型/クラス
+  - key: aliases
+    title: 別名
+  - key: inheritance
+    title: 継承
+  - key: signed
+    title: 符号
+    all: true
+  - key: size
+    title: サイズ(bit数)
+    all: true
+  - key: min
+    title: 最小値
+    all: true
+  - key: max
+    title: 最大値
+    all: true
+  - key: library
+    title: ライブラリ
+  - key: literal
+    title: リテラル
+  - key: desc
+    title: 説明
+    wrap: true
+list:
+  integer:
+    C:
+      - name: char
+        signed:
+          content: null
+          note: 環境依存。
+        size:
+          content:
+            - ≧ 8
+            - <code>CHRA_BIT</code>
+          note: 処理系の1byteのbit数と同数。
+        min:
+          content:
+            - 環境依存
+            - <code>CHAR_MIN</code>
+          note: "<code>SCHAR_MIN</code>または<code>UCHAR_MIN</code>と同値。"
+        max:
+          content:
+            - 環境依存
+            - <code>CHAR_MIN</code>
+          note: "<code>SCHAR_MAX</code>または<code>UCHAR_MAX</code>と同値。"
+        library:
+          content: "&lt;limits.h&gt;"
+          note: 定数を使用する場合のみ必要。
+        literal:
+          content:
+            - "'*'"
+            - "'\\52'"
+            - "'\\x2A'"
+          note: 実際は<code>int</code>型になります。しかし、入力文字は<code>unsigned char</code>の範囲内にしなければならないため、正しく<code>char</code>型へキャストされます。
+        desc: ASCII及びUTF-8等のマルチバイト文字。実体は<code>signed char</code>または<code>unsigned char</code>のどちらかになります。
+      - name: signed char
+        signed: true
+        size:
+          - ≧ 8
+          - <code>CHRA_BIT</code>
+        min:
+          - ≦ -127
+          - <code>SCHAR_MIN</code>
+        max:
+          - ≧ 127
+          - <code>SCHAR_MAX</code>
+        library:
+          content: "&lt;limits.h&gt;"
+          note: 定数を使用する場合のみ必要。
+      - name: unsigned char
+        signed: false
+        size:
+          - ≧ 8
+          - <code>CHRA_BIT</code>
+        min: 0
+        max:
+          - ≧255
+          - <code>UCHAR_MAX</code>
+        library:
+          content: "&lt;limits.h&gt;"
+          note: 定数を使用する場合のみ必要。
+        desc: <code>signed char</code>の符号無し版。
+      - name: short int
+        aliases: ["signed short", "short", "signed short int"]
+        signed: true
+        size:
+          - ≧ 16
+        min:
+          - ≦ -32767
+          - <code>SHRT_MIN</code>
+        max:
+          - ≧ 32767
+          - <code>SHRT_MAX</code>
+        library:
+          content: "&lt;limits.h&gt;"
+          note: 定数を使用する場合のみ必要。
+      - name: unsigned short int
+        aliases: ["unsigned short"]
+        signed: false
+        size: ≧ 16
+        min: 0
+        max:
+          - ≧ 65535
+          - <code>USHRT_MAX</code>
+        library:
+          content: "&lt;limits.h&gt;"
+          note: 定数を使用する場合のみ必要。
+        desc: <code>short int</code>の符号無し版。
+      - name: int
+        aliases: ["signed", "signed int"]
+        signed: true
+        size:
+          content: ≧ 16
+          note: 一般的に、16bit環境では16bit、32bit環境では32bit、64bit環境ではLLP64(Windows)とLP64(UNIX/Linux)が32bit、ILP64が64bit。
+        min:
+          - ≦ -32767
+          - <code>INT_MIN</code>
+        max:
+          - ≧ 32767
+          - <code>INT_MAX</code>
+        library:
+          content: "&lt;limits.h&gt;"
+          note: 定数を使用する場合のみ必要。
+        literal:
+          content:
+            - "42"
+            - "052"
+            - "0x2a"
+            - "-42"
+          note:
+            - 英字は大文字小文字どちらも使用できます。ただし、<code>ll</code>と<code>LL</code>のみ二つの文字を同じにする必要があります。
+            - <code>-</code>は単項演算子(unary operator)であり整数定数(integer constant)ではありません。
+        desc: サイズは実行環境のアーキテクチャで提案された(suggest)自然な大きさ(natural size)です。CPUのビット数やポインタのサイズと同じとは限りません。
+      - name: unsigned int
+        aliases: ["unsigned"]
+        signed: false
+        size:
+          content: ≧ 16
+          note: 一般的に、16bit環境では16bit、32bit環境では32bit、64bit環境ではLLP64(UNIX/Linux)とLP64(Windows)で32bit、ILP64で64bit。
+        min: 0
+        max:
+          - ≧ 65535
+          - <code>UINT_MAX</code>
+        library:
+          content: "&lt;limits.h&gt;"
+          note: 定数を使用する場合のみ必要。
+        literal:
+          content:
+            - "42u"
+            - "052"
+            - "052u"
+            - "0x2a"
+            - "0x2au"
+          note:
+            - 英字は大文字小文字どちらも使用できます。ただし、<code>ll</code>と<code>LL</code>のみ二つの文字を同じにする必要があります。
+        desc: <code>int</code>の符号無し版。
+      - name: long int
+        aliases: ["signed long int", "long", "signed long"]
+        signed: true
+        size:
+          content: ≧ 32
+          note: 一般的に、16bit環境と32bit環境では32bit、64bit環境ではLLP64(Windows)が32bit、LP64(UNIX/Linux)とILP64で64bit。
+        min:
+          - ≦ -2147483647
+          - <code>LONG_MAX</code>
+        max:
+          - ≦ 2147483647
+          - <code>LONG_MAX</code>
+        library:
+          content: "&lt;limits.h&gt;"
+          note: 定数を使用する場合のみ必要。
+        literal:
+          content:
+            - "42"
+            - "42l"
+            - "052"
+            - "052l"
+            - "0x2a"
+            - "0x2al"
+            - "-42l"
+          note:
+            - 英字は大文字小文字どちらも使用できます。ただし、<code>ll</code>と<code>LL</code>のみ二つの文字を同じにする必要があります。
+            - <code>-</code>は単項演算子(unary operator)であり整数定数(integer constant)ではありません。
+      - name: unsigned long int
+        aliases: ["unsigned long"]
+        signed: false
+        size:
+          content: ≧ 32
+          note: 一般的に、16bit環境と32bit環境では32bit、64bit環境ではLLP64(Windows)が32bit、LP64(UNIX/Linux)とILP64で64bit。
+        min: 0
+        max:
+          - ≦ 4294967295
+          - <code>LONG_MAX</code>
+        library:
+          content: "&lt;limits.h&gt;"
+          note: 定数を使用する場合のみ必要。
+        literal:
+          content:
+            - "42u"
+            - "42ul"
+            - "052"
+            - "052l"
+            - "052u"
+            - "052ul"
+            - "0x2a"
+            - "0x2al"
+            - "0x2au"
+            - "0x2aul"
+          note:
+            - 英字は大文字小文字どちらも使用できます。ただし、<code>ll</code>と<code>LL</code>のみ二つの文字を同じにする必要があります。
+            - <code>u/U</code>と<code>l/L/ll/LL</code>の順序は逆も可能です。
+        desc: <code>long int</code>の符号無し版。
+      - name: long long int
+        size: ≧ 64
+        signed: true
+        min:
+          - ≦ -9223372036854775807
+          - <code>LLONG_MIN</code>
+        max:
+          - ≧ 9223372036854775807
+          - <code>LLONG_MAX</code>
+        library:
+          content: "&lt;limits.h&gt;"
+          note: 定数を使用する場合のみ必要。
+        literal:
+          content:
+            - "42"
+            - "42l"
+            - "42ll"
+            - "052"
+            - "052l"
+            - "052ll"
+            - "0x2a"
+            - "0x2al"
+            - "0x2all"
+            - "-42ll"
+          note:
+            - 英字は大文字小文字どちらも使用できます。ただし、<code>ll</code>と<code>LL</code>のみ二つの文字を同じにする必要があります。
+            - <code>u/U</code>と<code>l/L/ll/LL</code>の順序は逆も可能です。
+            - <code>-</code>は単項演算子(unary operator)であり整数定数(integer constant)ではありません。
+      - name: unsigned long long int
+        signed: false
+        size: ≧ 64
+        min: 0
+        max:
+          - ≧ 18446744073709551615
+          - <code>ULLONG_MAX</code>
+        library:
+          content: "&lt;limits.h&gt;"
+          note: 定数を使用する場合のみ必要。
+        literal:
+          content:
+            - "42u"
+            - "42ul"
+            - "42ull"
+            - "052"
+            - "052l"
+            - "052ll"
+            - "052u"
+            - "052ul"
+            - "052ull"
+            - "0x2a"
+            - "0x2al"
+            - "0x2all"
+            - "0x2au"
+            - "0x2aul"
+            - "0x2aull"
+          note:
+            - 英字は大文字小文字どちらも使用できます。ただし、<code>ll</code>と<code>LL</code>のみ二つの文字を同じにする必要があります。
+            - <code>u/U</code>と<code>l/L/ll/LL</code>の順序は逆も可能です。
+        desc: <code>long long int</code>の符号無し版。
+      - name: int<em>N</em>_t
+        signed: true
+        size: <em>N</em>
+        min:
+          - -2<sup><em>N</em>-1</sup>
+          - <code>INT<em>N</em>_MIN</code>
+        max:
+          - 2<sup><em>N</em>-1</sup>-1
+          - <code>INT<em>N</em>_MAX</code>
+        library: "&lt;stdint.h&gt;"
+        desc: 必ず<em>N</em>bitのサイズになる整数です。実装はオプションですが、8, 16 32, 64はほとんどの環境で実装されています。"
+      - name: uint<em>N</em>_t
+        signed: false
+        size: <em>N</em>
+        min: 0
+        max:
+          - 2<sup><em>N</em></sup>-1
+          - <code>UINT<em>N</em>_MAX</code>
+        desc: <code>int<em>N</em>_t</code>の符号無し版。
+      - name: int_least<em>N</em>_t
+        signed: true
+        size: ≧ <em>N</em>
+        min:
+          - ≦ -(2<sup><em>N</em>-1</sup>-1)
+          - <code>INT_LEAST<em>N</em>_MIN</code>
+        max:
+          - ≧ 2<sup><em>N</em>-1</sup>-1
+          - <code>INT_LEAST<em>N</em>_MAX</code>
+        library: "&lt;stdint.h&gt;"
+        desc: 少なくとも<em>N</em>bitのサイズがある整数です。8, 16 32, 64のみ必須で、その他の数はオプションになります。
+      - name: uint_least<em>N</em>_t
+        signed: false
+        size: ≧ <em>N</em>
+        min: 0
+        max:
+          - ≧ 2<sup><em>N</em></sup>-1
+          - <code>UINT_LEAST<em>N</em>_MAX</code>
+        library: "&lt;stdint.h&gt;"
+        desc: <code>int<em>N</em>least_t</code>の符号無し版。8, 16 32, 64のみ必須、他はオプション。
+      - name: int_fast<em>N</em>_t
+        signed: true
+        size: ≧ <em>N</em>
+        min:
+          - ≦ -(2<sup><em>N</em>-1</sup>-1)
+          - <code>INT_FAST<em>N</em>_MIN</code>
+        max:
+          - ≧ 2<sup><em>N</em>-1</sup>-1
+          - <code>INT_FAST<em>N</em>_MAX</code>
+        library: "&lt;stdint.h&gt;"
+        desc: 少なくとも<em>N</em>bitのサイズがあり、かつ、演算処理が最も速い整数です。8, 16 32, 64のみ必須、他はオプション。
+      - name: uint_fast<em>N</em>_t
+        signed: false
+        size: ≧ <em>N</em>
+        min: 0
+        max:
+          - ≧ 2<sup><em>N</em></sup>-1
+          - <code>UINT_LEAST<em>N</em>_MAX</code>
+        desc: <code>int<em>N</em>fast_t</code>の符号無し版。8, 16 32, 64のみ必須、他はオプション。
+      - name: intptr_t INTPTR_MIN
+        signed: true
+        size: ≧ 16
+        min:
+          - ≦ -(2<sup>15</sup>-1)
+          - <code>INTPTR_MIN</code>
+        max:
+          - ≧ 2<sup>15</sup>-1
+          - <code>INTPTR_MAX</code>
+        library: "&lt;stdint.h&gt;"
+        desc: <code>void *</code>と必ず同じサイズの整数です。実装はオプション。
+      - name: uintptr_t
+        signed: false
+        size: ≧ 16
+        min: 0
+        max:
+          - ≧ 2<sup>16</sup>-1
+          - <code>UINTPTR_MAX</code>
+        library: "&lt;stdint.h&gt;"
+        desc: <code>intptr_t</code>の符号無し版。
+      - name: intmax_t
+        signed: true
+        size: ≧ 64
+        min:
+          - ≦ -(2<sup>63</sup>-1)
+          - <code>INTMAX_MIN</code>
+        max:
+          - ≧ 2<sup>63</sup>-1
+          - <code>INTMAX_MAX</code>
+        library: "&lt;stdint.h&gt;"
+        desc: 実装されている最大のサイズの整数です。
+      - name: uintmax_t
+        signed: false
+        size: ≧ 64
+        min: 0
+        max:
+          - ≧ 2<sup>64</sup>-1
+          - <code>UINTMAX_MAX</code>
+        library: "&lt;stdint.h&gt;"
+        desc: <code>intmax_t</code>の符号無し版。
+      - name: ptrdiff_t
+        signed: true
+        size: ≧ 16
+        min:
+          - ≦ −65535
+          - <code>PTRDIFF_MIN</code>
+        max:
+          - ≧ +65535
+          - <code>PTRDIFF_MAX</code>
+        library:
+          content: "&lt;stddef.h&gt;"
+          note : "定数は<code>&lt;stdint.h&gt;</code>に定義されています。"
+        desc: 二つのポインタを引いた結果。
+      - name: size_t
+        signed: false
+        size:
+        min: 0
+        max:
+          - ≧ 65535
+          - <code>SIZE_MAX</code>
+        library:
+          content: "&lt;stddef.h&gt;"
+          note : "定数は<code>&lt;stdint.h&gt;</code>に定義されています。"
+        desc: <code>sizeof</code>の結果。
+      - name: max_align_t
+        library:
+          content: "&lt;stddef.h&gt;"
+          note : "定数は<code>&lt;stdint.h&gt;</code>に定義されています。"
+        desc: 実装によってサポートされたアライメントと同じ大きさ。
+      - name: wchar_t
+        signed:
+          content: null
+          note: 環境依存。
+        size: ≧ 8
+        min:
+          - ≦ -127 or 0
+          - <code>WCHAR_MIN</code>
+        max:
+          - ≧ 127 or ≧ 255
+          - <code>WCHAR_MAX</code>
+        library:
+          content: "&lt;stddef.h&gt;"
+          note : "定数は<code>&lt;stdint.h&gt;</code>に定義されています。"
+        literal: ["L'*'", "L'\\52'", "L'\\x2A'"]
+        desc: ワイド文字。ワイド文字が入る大きさ。Unicode環境(0-0x10FFFFの21ビット)では符号有り通常32ビット。
+      - name: wint_t
+        signed:
+          content: null
+          note: 環境依存。
+        size: ≧ 16
+        min:
+          - ≦ -32767 or 0
+          - <code>WINT_MIN</code>
+        max:
+          - ≧ 32767 or ≧ 65535
+          - <code>WINT_MAX</code>
+        library:
+          content: "&lt;wchar.h&gt;"
+          note : "定数は<code>&lt;stdint.h&gt;</code>に定義されています。"
+        desc: <code>wchar_t</code>の全ての文字と<code>WEOF</code>と区別できる大きさ。<code>wchar_t</code>と同じ場合もある。
+      - name: char16_t
+        all: uint_least16_tと同じ。
+        library: "&lt;uchar.h&gt;"
+        literal: ["u'*'", "u'\\52'", "u'\\x2A'"]
+        desc: UTF-16文字。
+      - name: char32_t
+        all: uint_least32_tと同じ。
+        library: "&lt;uchar.h&gt;"
+        literal: ["U'*'", "U'\\52'", "U'\\x2A'"]
+        desc: UTF-32文字。
+      - name: sig_atomic_t
+        signed:
+          content: null
+          note: 環境依存。
+        size: ≧ 8
+        min:
+          - ≦ -127 or 0
+          - <code>SIG_ATOMIC_MIN</code>
+        max:
+          - ≧ 127 or ≧ 255
+          - <code>SIG_ATOMIC_MAX</code>
+        library:
+          content: "&lt;signal.h&gt;"
+          note : "定数は<code>&lt;stdint.h&gt;</code>に定義されています。"
+        desc: 非同期割り込みで、アトミックにアクセスできるviolate修飾付き整数。
+    C++: 調査中
+    Java:
+      - name: byte
+        signed: true
+        size: 8
+        min: -128
+        max: 127
+      - name: short
+        signed: true
+        size: 16
+        min: -32768
+        max: 32767
+      - name: int
+        signed: true
+        size: 32
+        min: -2147483648
+        max: 2147483647
+      - name: long
+        signed: true
+        size: 64
+        min: -9223372036854775808
+        max: 9223372036854775807
+      - name: char
+        signed: false
+        size: 16
+        min: 0
+        max: 65535
+        desc: UTF-16文字。
+      - name: Byte
+        all: <code>byte</code>のラッパークラス。
+        inheritance: ["Numeric", "Object"]
+        library: java.lang
+      - name: Short
+        all: <code>short</code>のラッパークラス。
+        library: java.lang
+      - name: Integer
+        all: <code>int</code>のラッパークラス。
+        library: java.lang
+      - name: Long
+        all: <code>long</code>のラッパークラス。
+        library: java.lang
+      - name: Character
+        inheritance: ["Object"]
+        all: <code>char</code>のラッパークラス。
+        library: java.lang
+      - name: BigInteger
+        signed: true
+        size: 多倍長
+        min:
+          content: -∞
+          note: メモリが許す限り。
+        max:
+          content: ∞
+          note: メモリが許す限り。
+        inheritance: ["Numeric", "Object"]
+        library: java.math
+    C#: 調査中
+    JavaScript: 存在しない、曖昧な数値参照。
+    Perl: 存在しない、曖昧な数値参照。
+    PHP:
+      - name: integer
+        signed: true
+        size:
+          - プラットフォーム依存
+          - <code>PHP_INT_SIZE</code>
+        min:
+          content:
+            - <code>~PHP_INT_MAX</code>
+          note: "最小値を求める定数は存在しないため、2の補数を使用します。参考：<a href=\"http://php.net/manual/reserved.constants.php#88288\">http://php.net/manual/reserved.constants.php#88288</a>"
+        max:
+          - <code>PHP_INT_MAX</code>
+      - name: BC Math
+        signed: true
+        size: 多倍長
+        min:
+          content: -∞
+          note: メモリが許す限り。
+        max:
+          content: ∞
+          note: メモリが許す限り。
+        library: 組込(bcmath)
+        literal:
+          - "\"42\""
+          - "\"-42\""
+        desc: 文字列を数字として扱います。コンパイル時に<kbd>--enable-bcmath</kbd>を指定する必要があります。Windowsバイナリは有効です。
+      - name: GMP
+        signed: true
+        size: 多倍長
+        min:
+          content: -∞
+          note: メモリが許す限り。
+        max:
+          content: ∞
+          note: メモリが許す限り。
+        library: gmp
+        literal: "gmp_init(\"42\")"
+        desc: コンパイル時に<kbd>--with-gmp</kbd>を指定する必要があります。GMP(GNU Multiple Precision)ライブラリをそのまま使用します。PHPとのやりとりは文字列で行います。
+    Python: 調査中
+    Ruby:
+      - name: Integer
+        inheritance: [Numeric", "Object", "BasicObject"]
+        all: 実体は<code>FixNum</code>または<code>BigNum</code>のどちらかです。
+        desc: 整数を扱う抽象クラスです。直接Integerのオブジェクトは存在しません。
+      - name: FixNum
+        inheritance: ["Integer", "Numeric", "Object", "BasicObject"]
+        size:
+          content: <em>P</em>-1
+          note: <em>P</em>はポインタのサイズ。
+        signed: true
+        min: -2<sup><em>P</em>-2</sup>
+        max: 2<sup><em>P</em>-2</sup>-1
+        literal:
+          content:
+            - "42"
+            - "-42"
+            - "0b101010"
+            - "052"
+            - "0o52"
+            - "0x2a"
+          note: <code>-</code>はリテラルの一部で有り、単項演算子メソッド<code>-@()</code>ではありません。また、<code>+</code>を付与することもできますが、同じくリテラル扱いです。
+        desc: 内部では<code>VALUE</code>に1bit分シフトされてそのまま保存されています。計算結果が最小値や最大値を超える場合は、自動的にBigNumに変換されます。
+      - name: BigNum
+        inheritance: ["Integer", "Numeric", "Object", "BasicObject"]
+        size: 多倍長
+        signed: true
+        min:
+          content: -∞
+          note: メモリが許す限り。
+        max:
+          content: ∞
+          note: メモリが許す限り。
+        literal: ["<code>Fixnum</code>と同じ"]
+        desc: 計算結果がFixNumに収まる場合は、自動的にFixNumに変換されます。
+
+---
+h2 概要
+p 整数は一番基本になる数です。整数の実装には大きく分けて三つあります。一つは0と正の整数を扱う符号無し整数、一つは0と正負両方の整数を扱う符号付き無し整数、最後はメモリが許す限りどんな大きな数も扱える多倍長整数です。
+p メモリは有限ですので、何バイトのメモリ領域を使って整数を表すのかが問題になります。たとえば1と言う数を表すのに1バイトあれば十分です。しかし1バイトのメモリでは符号無し整数で 0..255 、符号付き整数だと -125..126 までしか表現できません。そのため、言語によっては使用するメモリのサイズが異なる複数の大きさの型を用意しています。
+p しかし、使用するメモリが固定された場合は、非常に大きな数は計算できません。たとえば、21!(21の階乗=51090942171709440000)で8バイト(64ビット)を越えてしまいます。通常の環境では8バイトまで、多くても16バイトまでしか用意されてません。16バイトでも35!(35の階乗=10333147966386144929666651337523200000000)で足りなくなります。そこで、言語によっては多倍長整数が用意されています。
+p 多倍長整数は整数の大きさによって自動的に必要なメモリ領域を確保します。メモリが許す限りどんな大きさの整数も扱えるため、計算結果の大きさを気にする必要がありません。しかし、位ごとの計算やメモリ確保の処理が含まれるため、固定長の整数と違って多倍長整数の演算はコストが高くなります。通常の整数計算は固定長の整数を使用し、大きくなる場合だけ多倍長整数を使うのがいいようです。言語によっては内部処理が自動的に切り替わるものもあります。
+h2 一覧
+== lang_table(current_page.data.head, current_page.data.list["integer"])
+p C言語では、<code>int<em>N</em>_t</code>型を除く各型の最小値と最大値は以上または以下という定義であるため、実際は環境依存になります。<code>int</code>は32ビットであるとは限らず、-32767(-32768ではないことに注意)以下から32767以上であることしか保証されません。<code>char</code>の大きさを表し、1バイトと同じになる<code>CHAR_BIT</code>ですら、8ビットとは限りません。ビットの大きさに依存するプログラミングをする場合は<code>int<em>N</em>_t</code>型を使用しましょう。昔のプログラムでポインターを<code>int</code>にキャストするような例がありますが、<code>sizeof(int) == sizeof(void *)</code>が必ずしも真にならないため、使用すべきではありません。ポインターを数字として扱う場合はちゃんと<code>intptr_t</code>を使いましょう。
+p ほとんどの言語では文字を整数として扱います。エンコード方式によって扱う型が異なりますので、注意が必要です。
+h2 要件
+ul
+ li そのうち書きます。

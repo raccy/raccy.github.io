@@ -1,2 +1,6 @@
 p
-  == link_to "© 2014 raccy MIT/CC-BY Dual License", File.join(http_prefix, "plain/LICENSE.html")
+  == link_to "/plain/LICENSE.html" do
+    | MIT / 
+    == image_tag "https://i.creativecommons.org/l/by/4.0/80x15.png",
+        alt: "CC-BY"
+    |  Dual Licenses © 2014 raccy

@@ -1,0 +1,41 @@
+---
+title: 複素数型
+order: 3
+head:
+  - key: name
+    title: 型/クラス
+  - key: aliases
+    title: 別名
+  - key: inheritance
+    title: 継承
+  - key: part_type
+    title: 実部/虚部の型
+    all: true
+  — key: base
+    title: 基数
+    all: true
+  - key: imaginary_unit
+    title: 虚数単位(-1)<sup>1/2</sup>
+  - key: literal
+    title: リテラル
+  - key: library
+    title: ライブラリ
+  - key: desc
+    title: 説明
+    wrap: true
+list:
+  complex
+    Ruby:
+      - name: Complex
+        base: Numeric
+        imaginary_unit: Complex::I
+        literal:
+          - "1i"
+          - "4+2i"
+          - "Complex(4, 2)"
+          - "4+1/2ri"
+---
+h2 概要
+p 言語によっては複素数を扱う型が用意されている場合があります。
+h3 複素数型の一覧
+== lang_table(current_page.data.head, current_page.data.list["complex"])

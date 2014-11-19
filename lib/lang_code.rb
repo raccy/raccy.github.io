@@ -14,7 +14,7 @@ class LangCode < Middleman::Extension
       url = code_url(path)
       file_name = File.basename(path)
       text ||= file_name
-      return "<a href='#{url.escape}' download='#{file_name.escape}'>#{text}</a>"
+      return "<a href='#{escape_html(url)}' download='#{escape_html(file_name)}'>#{text}</a>"
     end
 
     def code_print(path)

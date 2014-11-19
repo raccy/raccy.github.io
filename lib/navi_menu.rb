@@ -19,7 +19,7 @@ class NaviMenu < Middleman::Extension
       html << link_to(resource.data.title, resource.url)
       if ! resource.children.empty?
         html << "<ul class=\"nav nav-pills nav-stacked\" role=\"tablist\">"
-        resource.children.each do |child|
+        resource.children.sort{|a,b| (a.data.order || 0) <=> (b.data.order || 0)}.each do |child|
           html << lang_navi_menu(child)
         end
         html << "</ul>"

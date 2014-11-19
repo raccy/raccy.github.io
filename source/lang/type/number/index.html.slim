@@ -1,0 +1,62 @@
+---
+title: 数値型
+list:
+  number:
+    name: 数値型
+    path: lang/type/number/
+    children:
+      integer:
+        name: 整数型
+        path: lang/type/number/integer.html
+        children:
+          natural:
+            name: 自然数型
+            desc: 1, 2, 3, ... 正の整数(0を含む場合もあるが、ここでは含めない)。通常は少なくとも符号無し整数型を使用するため、実装は無い。
+          unsigned_integer:
+            name: 符号無し整数型
+            desc: 0, 1, 2, ... 0と正の整数。
+            path: lang/type/number/integer.html
+          signed_integer:
+            name: 符号有り整数型
+            desc: -2, -1, 0, 1, 2, ... 0と正と負の整数。
+            path: lang/type/number/integer.html
+          arbitrary_precision_integer:
+            name: 多倍長整数型
+            desc: メモリが許す限りの大きな整数。
+            path: lang/type/number/integer.html
+      real:
+        name: 実数型
+        path: lang/type/number/real.html
+        children:
+          float:
+            name: 浮動小数点数型
+            desc: 0.1+e10, 0.1, ∞, ... 小数点数が動く数、大きい数や小さい数も可能。基数が2の場合と、10の場合がある。
+            path: lang/type/number/real.html
+          fixed:
+            name: 固定小数点数型
+            desc: 123.45, 23.00, ... 小数点数が固定された値、浮動小数点数に比べて精度が悪くなる。
+            path: lang/type/number/real.html
+          rational:
+            name: 有理数型
+            desc: 1/2, 4/3, ... 分数で表現可能な実数、計算結果が有理数である限り精度が落ちない。
+            path: lang/type/number/real.html
+          irrational:
+            name: 無理数型
+            desc: π, e, ... 分数で表現不可能な実数、有限なメモリでは実現不可。
+      complex:
+        name: 複素数型
+        desc: 3+2i, 2.8+4.5i, ... 虚数がある数。
+        path: lang/type/number/complex.html
+      ambiguous:
+        name: 曖昧な数値型
+        desc: 1, 3.2, ∞, ... 内部処理で整数と浮動点小数が混合された型。正確な演算には不向き。
+        path: lang/type/number/ambiguous.html
+---
+h2 概要
+p プログラミングは数の計算の集合体と言ってもいいでしょう。そのため、数値型はプログラミングの基礎となりなります。
+p 数と言っても実は多くの種類があります。普通の1や2といった数であればコンピュータのメモリ上で単純に表現できますが、0.1などの少数はメモリ上の構造を決める必要があります。そのため、数をいくつかの種類に分けて、計算できるようにしています。
+h2 数値型の種類
+== lang_contents(current_page.data.list)
+h2 解説
+p どんなプログラミング言語でも、メモリが有限である限り無理数を正確に表現することはできません。精度に合わせて円周率をその都度計算するなどの事はできますが、メモリ上に実体がある型としては不可能です。そのため、無理数を含む実数の計算は、精度が落ちるが浮動小数点数を使う場合が多いです。実社会では計測の精度以上で計算できれば十分と言えるでしょう。
+p 通貨演算を想定している言語には10進数が、計算分野を想定している言語には有理数や複素数が用意されています。逆に正確な演算をあまり想定しない言語は整数と浮動小数点数が混合された曖昧な数値型しか標準では用意されていません。実際は外部ライブラリを使えばどの言語でも同じ事ができますが、言語としての特徴が現れていいます。
