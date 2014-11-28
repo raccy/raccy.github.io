@@ -153,13 +153,16 @@ class LangHelper < Middleman::Extension
       html << "</table>"
       html << "</div>"
       if not note_list.empty?
-        html << "<ol class=\"small\">"
+        html << "<div class=\"note small\">"
+        html << "<h4>備考</h4>"
+        html << "<ol>"
         note_list.size.times do |i|
           html << "<li id=\"note#{i + 1}\">"
           html << note_list[i]
           html << "</li>"
         end
         html << "</ol>"
+        html << "</div>"
       end
       html << (<<-'EOS')
         <script>

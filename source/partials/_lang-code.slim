@@ -5,7 +5,9 @@
 - current_page_name = Pathname.new(File.dirname(current_page.path)). \
       relative_path_from(Pathname.new("lang")). \
       join(File.basename(current_page.path, ".*"))
-- lang_list = code_list(current_page_name)
+- displya_runsh = current_page.data["lang-code"] && \
+      current_page.data["lang-code"]["display_runsh"]
+- lang_list = code_list(current_page_name, displya_runsh)
 -
 .btn-group
   button.btn.btn-default.dropdown-toggle#lang-name type="button" data-toggle="dropdown" data-loading-text="読み込み中・・・"

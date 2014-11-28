@@ -50,8 +50,7 @@ list:
             - <code>CHAR_MIN</code>
           note: "<code>SCHAR_MAX</code>または<code>UCHAR_MAX</code>と同値。"
         library:
-          content: "&lt;limits.h&gt;"
-          note: 定数を使用する場合のみ必要。
+          note: 定数は&lt;limits.h&gt;で宣言。
         literal:
           content:
             - "'*'"
@@ -71,8 +70,7 @@ list:
           - ≧ 127
           - <code>SCHAR_MAX</code>
         library:
-          content: "&lt;limits.h&gt;"
-          note: 定数を使用する場合のみ必要。
+          note: 定数は&lt;limits.h&gt;で宣言。
       - name: unsigned char
         signed: false
         size:
@@ -83,8 +81,7 @@ list:
           - ≧255
           - <code>UCHAR_MAX</code>
         library:
-          content: "&lt;limits.h&gt;"
-          note: 定数を使用する場合のみ必要。
+          note: 定数は&lt;limits.h&gt;で宣言。
         desc: <code>signed char</code>の符号無し版。
       - name: short int
         aliases: ["signed short", "short", "signed short int"]
@@ -98,8 +95,7 @@ list:
           - ≧ 32767
           - <code>SHRT_MAX</code>
         library:
-          content: "&lt;limits.h&gt;"
-          note: 定数を使用する場合のみ必要。
+          note: 定数は&lt;limits.h&gt;で宣言。
       - name: unsigned short int
         aliases: ["unsigned short"]
         signed: false
@@ -109,8 +105,7 @@ list:
           - ≧ 65535
           - <code>USHRT_MAX</code>
         library:
-          content: "&lt;limits.h&gt;"
-          note: 定数を使用する場合のみ必要。
+          note: 定数は&lt;limits.h&gt;で宣言。
         desc: <code>short int</code>の符号無し版。
       - name: int
         aliases: ["signed", "signed int"]
@@ -125,8 +120,7 @@ list:
           - ≧ 32767
           - <code>INT_MAX</code>
         library:
-          content: "&lt;limits.h&gt;"
-          note: 定数を使用する場合のみ必要。
+          note: 定数は&lt;limits.h&gt;で宣言。
         literal:
           content:
             - "42"
@@ -142,20 +136,17 @@ list:
         signed: false
         size:
           content: ≧ 16
-          note: 一般的に、16bit環境では16bit、32bit環境では32bit、64bit環境ではLLP64(UNIX/Linux)とLP64(Windows)で32bit、ILP64で64bit。
+          note: 一般的に、16bit環境では16bit、32bit環境では32bit、64bit環境ではLLP64(Windows)とLP64(UNIX/Linux)で32bit、ILP64で64bit。
         min: 0
         max:
           - ≧ 65535
           - <code>UINT_MAX</code>
         library:
-          content: "&lt;limits.h&gt;"
-          note: 定数を使用する場合のみ必要。
+          note: 定数は&lt;limits.h&gt;で宣言。
         literal:
           content:
             - "42u"
-            - "052"
             - "052u"
-            - "0x2a"
             - "0x2au"
           note:
             - 英字は大文字小文字どちらも使用できます。ただし、<code>ll</code>と<code>LL</code>のみ二つの文字を同じにする必要があります。
@@ -173,15 +164,11 @@ list:
           - ≦ 2147483647
           - <code>LONG_MAX</code>
         library:
-          content: "&lt;limits.h&gt;"
-          note: 定数を使用する場合のみ必要。
+          note: 定数は&lt;limits.h&gt;で宣言。
         literal:
           content:
-            - "42"
             - "42l"
-            - "052"
             - "052l"
-            - "0x2a"
             - "0x2al"
             - "-42l"
           note:
@@ -198,19 +185,11 @@ list:
           - ≦ 4294967295
           - <code>LONG_MAX</code>
         library:
-          content: "&lt;limits.h&gt;"
-          note: 定数を使用する場合のみ必要。
+          note: 定数は&lt;limits.h&gt;で宣言。
         literal:
           content:
-            - "42u"
             - "42ul"
-            - "052"
-            - "052l"
-            - "052u"
             - "052ul"
-            - "0x2a"
-            - "0x2al"
-            - "0x2au"
             - "0x2aul"
           note:
             - 英字は大文字小文字どちらも使用できます。ただし、<code>ll</code>と<code>LL</code>のみ二つの文字を同じにする必要があります。
@@ -226,18 +205,11 @@ list:
           - ≧ 9223372036854775807
           - <code>LLONG_MAX</code>
         library:
-          content: "&lt;limits.h&gt;"
-          note: 定数を使用する場合のみ必要。
+          note: 定数は&lt;limits.h&gt;で宣言。
         literal:
           content:
-            - "42"
-            - "42l"
             - "42ll"
-            - "052"
-            - "052l"
             - "052ll"
-            - "0x2a"
-            - "0x2al"
             - "0x2all"
             - "-42ll"
           note:
@@ -252,87 +224,74 @@ list:
           - ≧ 18446744073709551615
           - <code>ULLONG_MAX</code>
         library:
-          content: "&lt;limits.h&gt;"
-          note: 定数を使用する場合のみ必要。
+          note: 定数は&lt;limits.h&gt;で宣言。
         literal:
           content:
-            - "42u"
-            - "42ul"
             - "42ull"
-            - "052"
-            - "052l"
-            - "052ll"
-            - "052u"
-            - "052ul"
             - "052ull"
-            - "0x2a"
-            - "0x2al"
-            - "0x2all"
-            - "0x2au"
-            - "0x2aul"
             - "0x2aull"
           note:
             - 英字は大文字小文字どちらも使用できます。ただし、<code>ll</code>と<code>LL</code>のみ二つの文字を同じにする必要があります。
             - <code>u/U</code>と<code>l/L/ll/LL</code>の順序は逆も可能です。
         desc: <code>long long int</code>の符号無し版。
-      - name: int<em>N</em>_t
+      - name: int<var>N</var>_t
         signed: true
-        size: <em>N</em>
+        size: <var>N</var>
         min:
-          - -2<sup><em>N</em>-1</sup>
-          - <code>INT<em>N</em>_MIN</code>
+          - -2<sup><var>N</var>-1</sup>
+          - <code>INT<var>N</var>_MIN</code>
         max:
-          - 2<sup><em>N</em>-1</sup>-1
-          - <code>INT<em>N</em>_MAX</code>
+          - 2<sup><var>N</var>-1</sup>-1
+          - <code>INT<var>N</var>_MAX</code>
         library: "&lt;stdint.h&gt;"
-        desc: 必ず<em>N</em>bitのサイズになる整数です。実装はオプションですが、8, 16 32, 64はほとんどの環境で実装されています。"
-      - name: uint<em>N</em>_t
+        desc: 必ず<var>N</var>bitのサイズになる整数です。実装はオプションですが、8, 16 32, 64はほとんどの環境で実装されています。"
+      - name: uint<var>N</var>_t
         signed: false
-        size: <em>N</em>
+        size: <var>N</var>
         min: 0
         max:
-          - 2<sup><em>N</em></sup>-1
-          - <code>UINT<em>N</em>_MAX</code>
-        desc: <code>int<em>N</em>_t</code>の符号無し版。
-      - name: int_least<em>N</em>_t
+          - 2<sup><var>N</var></sup>-1
+          - <code>UINT<var>N</var>_MAX</code>
+        desc: <code>int<var>N</var>_t</code>の符号無し版。
+      - name: int_least<var>N</var>_t
         signed: true
-        size: ≧ <em>N</em>
+        size: ≧ <var>N</var>
         min:
-          - ≦ -(2<sup><em>N</em>-1</sup>-1)
-          - <code>INT_LEAST<em>N</em>_MIN</code>
+          - ≦ -(2<sup><var>N</var>-1</sup>-1)
+          - <code>INT_LEAST<var>N</var>_MIN</code>
         max:
-          - ≧ 2<sup><em>N</em>-1</sup>-1
-          - <code>INT_LEAST<em>N</em>_MAX</code>
+          - ≧ 2<sup><var>N</var>-1</sup>-1
+          - <code>INT_LEAST<var>N</var>_MAX</code>
         library: "&lt;stdint.h&gt;"
-        desc: 少なくとも<em>N</em>bitのサイズがある整数です。8, 16 32, 64のみ必須で、その他の数はオプションになります。
-      - name: uint_least<em>N</em>_t
+        desc: 少なくとも<var>N</var>bitのサイズがある整数です。8, 16 32, 64のみ必須で、その他の数はオプションになります。
+      - name: uint_least<var>N</var>_t
         signed: false
-        size: ≧ <em>N</em>
+        size: ≧ <var>N</var>
         min: 0
         max:
-          - ≧ 2<sup><em>N</em></sup>-1
-          - <code>UINT_LEAST<em>N</em>_MAX</code>
+          - ≧ 2<sup><var>N</var></sup>-1
+          - <code>UINT_LEAST<var>N</var>_MAX</code>
         library: "&lt;stdint.h&gt;"
-        desc: <code>int<em>N</em>least_t</code>の符号無し版。8, 16 32, 64のみ必須、他はオプション。
-      - name: int_fast<em>N</em>_t
+        desc: <code>int<var>N</var>least_t</code>の符号無し版。8, 16 32, 64のみ必須、他はオプション。
+      - name: int_fast<var>N</var>_t
         signed: true
-        size: ≧ <em>N</em>
+        size: ≧ <var>N</var>
         min:
-          - ≦ -(2<sup><em>N</em>-1</sup>-1)
-          - <code>INT_FAST<em>N</em>_MIN</code>
+          - ≦ -(2<sup><var>N</var>-1</sup>-1)
+          - <code>INT_FAST<var>N</var>_MIN</code>
         max:
-          - ≧ 2<sup><em>N</em>-1</sup>-1
-          - <code>INT_FAST<em>N</em>_MAX</code>
+          - ≧ 2<sup><var>N</var>-1</sup>-1
+          - <code>INT_FAST<var>N</var>_MAX</code>
         library: "&lt;stdint.h&gt;"
-        desc: 少なくとも<em>N</em>bitのサイズがあり、かつ、演算処理が最も速い整数です。8, 16 32, 64のみ必須、他はオプション。
-      - name: uint_fast<em>N</em>_t
+        desc: 少なくとも<var>N</var>bitのサイズがあり、かつ、演算処理が最も速い整数です。8, 16 32, 64のみ必須、他はオプション。
+      - name: uint_fast<var>N</var>_t
         signed: false
-        size: ≧ <em>N</em>
+        size: ≧ <var>N</var>
         min: 0
         max:
-          - ≧ 2<sup><em>N</em></sup>-1
-          - <code>UINT_LEAST<em>N</em>_MAX</code>
-        desc: <code>int<em>N</em>fast_t</code>の符号無し版。8, 16 32, 64のみ必須、他はオプション。
+          - ≧ 2<sup><var>N</var></sup>-1
+          - <code>UINT_LEAST<var>N</var>_MAX</code>
+        desc: <code>int<var>N</var>fast_t</code>の符号無し版。8, 16 32, 64のみ必須、他はオプション。
       - name: intptr_t INTPTR_MIN
         signed: true
         size: ≧ 16
@@ -487,23 +446,27 @@ list:
         max: 65535
         desc: UTF-16文字。
       - name: Byte
-        all: <code>byte</code>のラッパークラス。
         inheritance: ["Numeric", "Object"]
+        all: <code>byte</code>のラッパークラス。
         library: java.lang
       - name: Short
+        inheritance: ["Numeric", "Object"]
         all: <code>short</code>のラッパークラス。
         library: java.lang
       - name: Integer
+        inheritance: ["Numeric", "Object"]
         all: <code>int</code>のラッパークラス。
         library: java.lang
       - name: Long
+        inheritance: ["Numeric", "Object"]
         all: <code>long</code>のラッパークラス。
         library: java.lang
       - name: Character
         inheritance: ["Object"]
         all: <code>char</code>のラッパークラス。
         library: java.lang
-      - name: BigInteger
+      - name: java.math.BigInteger
+        inheritance: ["Numeric", "Object"]
         signed: true
         size: 多倍長
         min:
@@ -512,11 +475,10 @@ list:
         max:
           content: ∞
           note: メモリが許す限り。
-        inheritance: ["Numeric", "Object"]
         library: java.math
     C#: 調査中
-    JavaScript: 存在しない、曖昧な数値参照。
-    Perl: 存在しない、曖昧な数値参照。
+    JavaScript: 曖昧な数値型参照。
+    Perl: 曖昧な数値型参照。
     PHP:
       - name: integer
         signed: true
@@ -529,6 +491,7 @@ list:
           note: "最小値を求める定数は存在しないため、2の補数を使用します。参考：<a href=\"http://php.net/manual/reserved.constants.php#88288\">http://php.net/manual/reserved.constants.php#88288</a>"
         max:
           - <code>PHP_INT_MAX</code>
+        desc: 計算結果が最小値や最大値を越える場合は、自動的にfloatへ変化され、丸め込みが発生します。
       - name: BC Math
         signed: true
         size: 多倍長
@@ -564,21 +527,21 @@ list:
       - name: FixNum
         inheritance: ["Integer", "Numeric", "Object", "BasicObject"]
         size:
-          content: <em>P</em>-1
-          note: <em>P</em>はポインタのサイズ。
+          content: <var>P</var>-1
+          note: <var>P</var>はポインタのサイズ。
         signed: true
-        min: -2<sup><em>P</em>-2</sup>
-        max: 2<sup><em>P</em>-2</sup>-1
+        min: -2<sup><var>P</var>-2</sup>
+        max: 2<sup><var>P</var>-2</sup>-1
         literal:
           content:
             - "42"
-            - "-42"
             - "0b101010"
             - "052"
             - "0o52"
             - "0x2a"
+            - "-42"
           note: <code>-</code>はリテラルの一部で有り、単項演算子メソッド<code>-@()</code>ではありません。また、<code>+</code>を付与することもできますが、同じくリテラル扱いです。
-        desc: 内部では<code>VALUE</code>に1bit分シフトされてそのまま保存されています。計算結果が最小値や最大値を超える場合は、自動的にBigNumに変換されます。
+        desc: 内部では<code>VALUE</code>に1bit分シフトされてそのまま保存されています。計算結果が最小値や最大値を超える場合は、自動的に<code>BigNum</code>に変換されます。
       - name: BigNum
         inheritance: ["Integer", "Numeric", "Object", "BasicObject"]
         size: 多倍長
@@ -589,8 +552,8 @@ list:
         max:
           content: ∞
           note: メモリが許す限り。
-        literal: ["<code>Fixnum</code>と同じ"]
-        desc: 計算結果がFixNumに収まる場合は、自動的にFixNumに変換されます。
+        literal: <code>Fixnum</code>と同じ
+        desc: 計算結果が<code>FixNum</code>に収まる場合は、自動的に<code>FixNum</code>に変換されます。
 
 ---
 h2 概要
@@ -600,8 +563,25 @@ p しかし、使用するメモリが固定された場合は、非常に大き
 p 多倍長整数は整数の大きさによって自動的に必要なメモリ領域を確保します。メモリが許す限りどんな大きさの整数も扱えるため、計算結果の大きさを気にする必要がありません。しかし、位ごとの計算やメモリ確保の処理が含まれるため、固定長の整数と違って多倍長整数の演算はコストが高くなります。通常の整数計算は固定長の整数を使用し、大きくなる場合だけ多倍長整数を使うのがいいようです。言語によっては内部処理が自動的に切り替わるものもあります。
 h2 一覧
 == lang_table(current_page.data.head, current_page.data.list["integer"])
-p C言語では、<code>int<em>N</em>_t</code>型を除く各型の最小値と最大値は以上または以下という定義であるため、実際は環境依存になります。<code>int</code>は32ビットであるとは限らず、-32767(-32768ではないことに注意)以下から32767以上であることしか保証されません。<code>char</code>の大きさを表し、1バイトと同じになる<code>CHAR_BIT</code>ですら、8ビットとは限りません。ビットの大きさに依存するプログラミングをする場合は<code>int<em>N</em>_t</code>型を使用しましょう。昔のプログラムでポインターを<code>int</code>にキャストするような例がありますが、<code>sizeof(int) == sizeof(void *)</code>が必ずしも真にならないため、使用すべきではありません。ポインターを数字として扱う場合はちゃんと<code>intptr_t</code>を使いましょう。
+p C言語では、<code>int<var>N</var>_t</code>型を除く各型の最小値と最大値は以上または以下という定義であるため、実際は環境依存になります。<code>int</code>は32ビットであるとは限らず、-32767(-32768ではないことに注意)以上かつ32767以下の範囲にある数が必ず収めることができることしか保証されません。<code>char</code>の大きさを表し、1バイトと同じになる<code>CHAR_BIT</code>ですら、8ビットとは限りません。ビットの大きさに依存するプログラミングをする場合は<code>int<var>N</var>_t</code>型を使用しましょう。昔のプログラムでポインターを<code>int</code>にキャストするような例がありますが、<code>sizeof(int) == sizeof(void *)</code>が必ずしも真にならないため、使用すべきではありません。ポインターを数字として扱う場合はちゃんと<code>intptr_t</code>を使いましょう。
 p ほとんどの言語では文字を整数として扱います。エンコード方式によって扱う型が異なりますので、注意が必要です。
 h2 要件
 ul
- li そのうち書きます。
+  li
+    p 整数型の変数<var>a</var>と変数<var>b</var>を宣言する。宣言が不要な言語は省略してもよい。
+  li
+    p 変数<var>a</var>に24の値を代入する。
+  li
+    p 変数<var>b</var>に-24の値を代入する。
+  li
+    p 標準出力に変数<var>a</var>の値と変数<var>b</var>の値をそれぞれ出力する。
+  li
+    p 標準出力に変数の値を出力した後に、改行を行う。
+  li
+    p 全ての変数を出力後に、終了する。
+  li
+    p 標準入出力環境のエンコードはUTF-8とする。
+  li
+    p ソースコードのエンコードはUTF-8とする。
+h2 ソースコード
+== partial "lang-code"

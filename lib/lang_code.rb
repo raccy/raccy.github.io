@@ -27,12 +27,13 @@ class LangCode < Middleman::Extension
       return url
     end
 
-    def code_file_search(code_name, path)
+    def code_file_search(code_name, path, display_runsh = false)
       full_path = File.join(extensions[:lang_code].options.code_dir, code_name, path)
       list = {}
       if FileTest.directory?(full_path)
         Dir.foreach(full_path) do |e|
           next if e == "." || e == ".."
+          next if e == "run.sh" && (! display_runsh)
           if path == "."
             child_path = e
           else
@@ -47,13 +48,13 @@ class LangCode < Middleman::Extension
       return list
     end
 
-    def code_list(name)
+    def code_list(name, display_runsh = false)
       parent_code_path = File.join(extensions[:lang_code].options.code_dir, name)
       lang_list = {}
       Dir.foreach(parent_code_path) do |e|
         next if e == "." || e == ".."
         if FileTest.directory?(File.join(parent_code_path, e))
-          path_list = code_file_search(File.join(name, e), ".")
+          path_list = code_file_search(File.join(name, e), ".", display_runsh)
           lang_list[e] = [data.lang[e], path_list]
         end
       end

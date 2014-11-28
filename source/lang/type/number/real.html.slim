@@ -8,20 +8,22 @@ head:
     title: 別名
   - key: inheritance
     title: 継承
-  - key: signed
-    title: 符号
-    all: true
-  — key: base
+  - key: base
     title: 基数
     all: true
   - key: size
     title: サイズ(bit数)
     all: true
-  - key: min
-    title: 最小表現数
+  - key: exponent
+    titel: 指数(bit数)
     all: true
+  - key: precision
+    title: 精度(bit数)
   - key: max
     title: 最大表現数
+    all: true
+  - key: min
+    title: 最小表現数
     all: true
   - key: infinity
     title: 無限値
@@ -43,58 +45,58 @@ head:
     wrap: true
 list:
   float:
-    _head:
-      - key: name
-        title: 型/クラス
-        type: :string
-        wrap: false
-      - key: aliases
-        title: 別名
-        type: :array
-        wrap: false
-      - key: inheritance
-        title: 継承
-        type: :array
-        wrap: false
-      - key: size
-        title: サイズ(bit数)
-        type: :string
-        wrap: false
-      - key: min
-        title: 最小値
-        type: :string
-        wrap: false
-      - key: max
-        title: 最大値
-        type: :string
-        wrap: false
-      - key: nan
-        title: 非数値
-        type: :string
-        wrap: false
-      - key: zero
-        name: +0/-0区別
-        type: bool
-        wrap: false
-      - key: literal
-        title: リテラル
-        type: :array
-        wrap: false
-      - key: library
-        title: ライブラリ
-        type: :string
-        wrap: false
-      - key: desc
-        title: 説明
-        type: :string
-        wrap: true
+    IEEE754:
+      - name: binary16
+        aliases: 半精度
+        base: 2
+        size: 16
+        exponent: 5
+        precision: 10
+      - name: binary32
+        aliases: 単精度
+        base: 2
+        size: 32
+        exponent: 8
+        precision: 23
+      - name: binary64
+        aliases: 倍精度
+        base: 2
+        size: 64
+        exponent: 11
+        precision: 52
+      - name: binary128
+        aliases: 四倍精度
+        base: 2
+        size: 128
+        exponent: 15
+        precision: 112
+      - name: decimal32
+        aliases: 十進単精度
+        base: 10
+        size: 32
+      - name: decimal64
+        aliases: 十進倍精度
+        base: 10
+        size: 64
+      - name: decimal128
+        aliases: 十進四倍精度
+        base: 10
+        size: 128
     C:
       - name: float
         size: 未定義、通常は32
+        min: 1E-5
+        max: 1E+37
+        desc: IEEE754 binary16 単精度
       - name: double
         size: 未定義、通常は64
+        min: 1E-9
+        max: 1E+37
       - name: long double
         size: 未定義、通常は128
+        min: 1E-9
+        max: 1E+37
+        Python:
     Python:
       - name: decimal
         size: 精度を指定可能
@@ -116,6 +118,7 @@ list:
         desc:
           - 実装は<code>double</code>を使用しているため、そのまま<code>double</code>の範囲に依存します。
           - CRubyでは、<code>sizeof(void *) >= sizeof(dobule)</code>の環境でのみFlonumという特殊な形式で実装される場合があります。内部で2bit分削ったビット列を<code>VALUE</code>にそのまま保存することで、この2bit分を含まない範囲の浮動小数点数については<code>dobule</code>としてそのまま扱うことができ、処理を高速化しています。範囲外になる場合は自動的に通常のFloatになります。プログラマーからは(オブジェクトのIDがいつも同じになること以外に)Floatと区別はできません。
+  fixed: []
   rational:
     Ruby:
       - name: Rational
@@ -139,5 +142,5 @@ h3 有理数型の一覧
 h3 無理数型の一覧
 p 存在しません。
 h2 計算速度
-p ほとんどの実装で、浮動小数点数はIEEE 754の2進数(基数2)を採用しています。現在あるほとんどのCPUはIEEE 754についてコア部分とは別に演算ユニットを持ち、高速に計算することができます。10進数(基数10)の実装であるIEEE 854もIEEE 754に吸収され、同じくCPUには専用の算ユニットがあります。速度については2進数と10進数どちらが速いかは資料を見つけられなかったため、わかりませんでした。通貨計算などの、10進数での表記が重要になる場合を除き、一般の計算には2進数の浮動小数点数を使用しているようです。
+p ほとんどの実装で、浮動小数点数はIEEE 754の2進数(基数2)を採用しています。現在あるほとんどのCPUはIEEE 754 倍精度についてコア部分とは別に演算ユニットを持ち、高速に計算することができます。10進数(基数10)の実装であるIEEE 854もIEEE 754に吸収され、同じくCPUには専用の算ユニットがあります。速度については2進数と10進数どちらが速いかは資料を見つけられなかったため、わかりませんでした。通貨計算などの、10進数での表記が重要になる場合を除き、一般の計算には2進数の浮動小数点数を使用しているようです。
 p 有理数型の計算は遅く、多くのメモリが必要になります。速度を期待してはいけません。
