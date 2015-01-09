@@ -23,3 +23,5 @@ gem "slim"
 gem "kramdown"
 
 gem "middleman-minify-html"
+
+gem "middleman-deploy"

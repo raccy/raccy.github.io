@@ -59,7 +59,7 @@ set :js_dir, 'javascripts'
 
 set :images_dir, 'images'
 
-set :build_dir, '../raccy.github.io'
+set :build_dir, 'build'
 
 set :partials_dir, 'partials'
 
@@ -101,4 +101,11 @@ configure :build do
   # Or use a different image path
   # set :http_prefix, "/Content/images/"
 
+end
+
+activate :deploy do |deploy|
+  deploy.build_before = true
+  deploy.method = :git
+  deploy.remote = 'git@github.com:raccy/raccy.github.io.git'
+  deploy.branch = 'master'
 end
