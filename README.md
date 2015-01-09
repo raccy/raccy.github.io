@@ -1,14 +1,13 @@
-# Soruce of raccy.githut.io
+# Soruce of raccy.github.io
 
 このレポジトリは http://raccy.github.io/ のソースコードです。加筆・修正があれば、こちらに pull request を送ってください。
 
 ## 使い方
 
 ```
-$ mkdir raccy.githu.io
-$ git clone https://gituh.com/raccy/raccy.githut.io.middleman
-$ cd raccy.githut.io.middleman
+$ git clone https://github.com/raccy/raccy.github.io.middleman
+$ cd raccy.github.io.middleman
 $ bundle install
-$ bundle exec middlman
+$ bundle exec middleman
 Access to http://localhost:4567
 ```
