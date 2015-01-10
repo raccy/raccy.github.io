@@ -1,18 +1,18 @@
 # MIT / CC-BY デュアル・ライセンス条項
 
-© 2014 五十嵐 誠 (raccy)
+Dual licensed under the MIT or CC-BY licenses. © 2014-2015 五十嵐 誠 (raccy)
 
 この作品はMITライセンスとクリエイティブ・コモンズ・表示 4.0 国際・ライセンスのデュアルライセンスで提供されています。あなたは、次の三つから選択できます。
 
-1. MITライセンスで提供されたものと見なす。
-2. クリエイティブ・コモンズ・表示 4.0 国際・ライセンスで提供されたものと見なす。
-3. 両方のライセンスで提供されたと見なし、両ライセンスに矛盾しない範囲で従う。
+1. このデュアル・ライセンスで提供されたと見なし、両ライセンスに矛盾しない範囲で従う。
+2. MITライセンスで提供されたものと見なす。
+3. クリエイティブ・コモンズ・表示 4.0 国際・ライセンスで提供されたものと見なす。
 
 MITライセンスは下記の「The MIT License (MIT)」の項目を参照して下さい。クリエイティブ・コモンズ・表示 4.0 国際・ライセンスののコピーを閲覧するには、[http://creativecommons.org/licenses/by/4.0/](http://creativecommons.org/licenses/by/4.0/)を訪問して下さい。
 
 ### The MIT License (MIT)
 
-Copyright (c) 2014 IGARASHI Makoto
+Copyright (c) 2014-2015 IGARASHI Makoto
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
