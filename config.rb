@@ -1,3 +1,5 @@
+# coding: utf-8
+
 ###
 # Requires
 ###
@@ -108,4 +110,7 @@ activate :deploy do |deploy|
   deploy.method = :git
   deploy.remote = 'git@github.com:raccy/raccy.github.io.git'
   deploy.branch = 'master'
+  deploy.strategy = :force_push
+  deploy.commit_message = "自動コミット " +
+      Time.now.strftime('%Y日%m月%d日%H時%M分%S秒(%Z)')
 end
