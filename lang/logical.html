@@ -1,0 +1,125 @@
+<!DOCTYPE html> <html> <head> <meta charset=utf-8> <meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"> <meta name=viewport content="width=device-width, initial-scale=1"> <title>論理学？</title><link href="/stylesheets/all.css" rel=stylesheet /><link href="/stylesheets/highlight.css" rel=stylesheet /><link href="/stylesheets/lang-navi.css" rel=stylesheet /><script src="/javascripts/all.js"></script><script src="/javascripts/highlight.pack.js"></script><script src="/javascripts/html5shiv.js"></script><!--[endif]--> </head> <body class="lang lang_logical"> <header> <div class=container> <nav class="navbar navbar-default" role=navigation> <div class=container-fluid> <div class=navbar-header> <a class=navbar-brand href="#">自家用プログラム言語大全</a> </div> </div> </nav> </div> </header> <div class=container> <div class=row> <div class=col-md-3> <nav class=lang-navi-sidebar> <h4> 目次 </h4> <ul class="nav nav-pills nav-stacked" role=tablist> <li><a href="/lang/">自家用プログラム言語大全</a><ul class="nav nav-pills nav-stacked" role=tablist><li><a href="/lang/base/">言語の基礎</a><ul class="nav nav-pills nav-stacked" role=tablist><li><a href="/lang/base/hello.html">こんにちは、世界！</a></li></ul></li><li class=active><a href="/lang/logical.html">論理学？</a></li><li><a href="/lang/operator/">演算子</a></li><li><a href="/lang/type/">型</a><ul class="nav nav-pills nav-stacked" role=tablist><li><a href="/lang/type/number/">数値型</a><ul class="nav nav-pills nav-stacked" role=tablist><li><a href="/lang/type/number/integer.html">整数型</a></li><li><a href="/lang/type/number/real.html">実数型</a></li><li><a href="/lang/type/number/complex.html">複素数型</a></li><li><a href="/lang/type/number/ambiguous.html">曖昧な数値型</a></li></ul></li></ul></li></ul></li> </ul> </nav> </div> <div class=col-md-9> <ol class=breadcrumb> <li> <a href="/lang/">自家用プログラム言語大全</a> </li> <li class=active> 論理学？ </li> </ol><h1> 論理学？ </h1><main><div> <h3> A & B </h3> <canvas id=ab0 width=400 height=200></canvas> <h3> A | B </h3> <canvas id=ab1 width=400 height=200></canvas> <h3> A ^ B </h3> <canvas id=ab2 width=400 height=200></canvas> </div> <script>
+              (function() {
+                var CircleDraw;
+              
+                CircleDraw = (function() {
+                  function CircleDraw(context, width, height, r) {
+                    this.context = context;
+                    this.width = width;
+                    this.height = height;
+                    this.r = r;
+                    this.len = this.r;
+                  }
+              
+                  CircleDraw.prototype.clear = function() {
+                    return this.context.clearRect(0, 0, this.width, this.height);
+                  };
+              
+                  CircleDraw.prototype.draw_circle = function(x, y, r, color) {
+                    if (color == null) {
+                      color = '#000000';
+                    }
+                    this.context.beginPath();
+                    this.context.arc(x, y, r, 0, Math.PI * 2);
+                    this.context.strokStyle = color;
+                    this.context.stroke();
+                    return this.context.closePath();
+                  };
+              
+                  CircleDraw.prototype.draw_text = function(x, y, text, size, color) {
+                    if (color == null) {
+                      color = '#000000';
+                    }
+                    this.context.beginPath();
+                    this.context.font = "" + size + "px sans-serif";
+                    this.context.textAlign = "center";
+                    this.context.textBaseline = "middle";
+                    this.context.fillStyle = color;
+                    this.context.fillText(text, x, y);
+                    return this.context.closePath();
+                  };
+              
+                  CircleDraw.prototype.draw_fill = function(color, func) {
+                    this.context.beginPath();
+                    func(this);
+                    this.context.fillStyle = color;
+                    this.context.fill();
+                    return this.context.closePath();
+                  };
+              
+                  CircleDraw.prototype.loop = function(msec, func) {
+                    func(this);
+                    return setTimeout((function(_this) {
+                      return function() {
+                        return _this.loop(msec, func);
+                      };
+                    })(this), msec);
+                  };
+              
+                  CircleDraw.prototype.next_len = function() {
+                    this.len--;
+                    if (this.len < 0) {
+                      return this.len = this.r;
+                    }
+                  };
+              
+                  return CircleDraw;
+              
+                })();
+              
+                $(function() {
+                  var cd_ab0, cd_ab1, cd_ab2, ctx_ab0, ctx_ab1, ctx_ab2, e_ab0, e_ab1, e_ab2;
+                  e_ab0 = $("#ab0")[0];
+                  ctx_ab0 = e_ab0.getContext("2d");
+                  cd_ab0 = new CircleDraw(ctx_ab0, e_ab0.clientWidth, e_ab0.clientHeight, e_ab0.clientWidth / 4);
+                  cd_ab0.loop(50, function(cd) {
+                    cd.clear();
+                    cd.draw_fill('#0000D0', function(cd) {
+                      cd.context.arc(cd.width / 2 - cd.len, cd.height / 2, cd.r, 0 - Math.acos(cd.len / cd.r), 0 + Math.acos(cd.len / cd.r));
+                      return cd.context.arc(cd.width / 2 + cd.len, cd.height / 2, cd.r, Math.PI - Math.acos(cd.len / cd.r), Math.PI + Math.acos(cd.len / cd.r));
+                    });
+                    cd.draw_circle(cd.width / 2 - cd.len, cd.height / 2, cd.r);
+                    cd.draw_circle(cd.width / 2 + cd.len, cd.height / 2, cd.r);
+                    cd.draw_text(cd.width / 2 - cd.len - 60, cd.height / 2, "A", 60);
+                    cd.draw_text(cd.width / 2 + cd.len + 60, cd.height / 2, "B", 60);
+                    return cd.next_len();
+                  });
+                  e_ab1 = $("#ab1")[0];
+                  ctx_ab1 = e_ab1.getContext("2d");
+                  cd_ab1 = new CircleDraw(ctx_ab1, e_ab1.clientWidth, e_ab1.clientHeight, e_ab1.clientWidth / 4);
+                  cd_ab1.loop(50, function(cd) {
+                    cd.clear();
+                    cd.draw_fill('#00D000', function(cd) {
+                      cd.context.arc(cd.width / 2 - cd.len, cd.height / 2, cd.r, 0 - Math.acos(cd.len / cd.r), 0 + Math.acos(cd.len / cd.r), true);
+                      return cd.context.arc(cd.width / 2 + cd.len, cd.height / 2, cd.r, Math.PI - Math.acos(cd.len / cd.r), Math.PI + Math.acos(cd.len / cd.r), true);
+                    });
+                    cd.draw_circle(cd.width / 2 - cd.len, cd.height / 2, cd.r);
+                    cd.draw_circle(cd.width / 2 + cd.len, cd.height / 2, cd.r);
+                    cd.draw_text(cd.width / 2 - cd.len - 60, cd.height / 2, "A", 60);
+                    cd.draw_text(cd.width / 2 + cd.len + 60, cd.height / 2, "B", 60);
+                    return cd.next_len();
+                  });
+                  e_ab2 = $("#ab2")[0];
+                  ctx_ab2 = e_ab2.getContext("2d");
+                  cd_ab2 = new CircleDraw(ctx_ab2, e_ab2.clientWidth, e_ab2.clientHeight, e_ab2.clientWidth / 4);
+                  return cd_ab2.loop(50, function(cd) {
+                    cd.clear();
+                    cd.draw_fill('#D00000', function(cd) {
+                      cd.context.arc(cd.width / 2 - cd.len, cd.height / 2, cd.r, 0 - Math.acos(cd.len / cd.r), 0 + Math.acos(cd.len / cd.r), true);
+                      return cd.context.arc(cd.width / 2 + cd.len, cd.height / 2, cd.r, Math.PI - Math.acos(cd.len / cd.r), Math.PI + Math.acos(cd.len / cd.r));
+                    });
+                    cd.draw_fill('#D00000', function(cd) {
+                      cd.context.arc(cd.width / 2 - cd.len, cd.height / 2, cd.r, 0 - Math.acos(cd.len / cd.r), 0 + Math.acos(cd.len / cd.r));
+                      return cd.context.arc(cd.width / 2 + cd.len, cd.height / 2, cd.r, Math.PI - Math.acos(cd.len / cd.r), Math.PI + Math.acos(cd.len / cd.r), true);
+                    });
+                    cd.draw_circle(cd.width / 2 - cd.len, cd.height / 2, cd.r);
+                    cd.draw_circle(cd.width / 2 + cd.len, cd.height / 2, cd.r);
+                    cd.draw_text(cd.width / 2 - cd.len - 60, cd.height / 2, "A", 60);
+                    cd.draw_text(cd.width / 2 + cd.len + 60, cd.height / 2, "B", 60);
+                    return cd.next_len();
+                  });
+                });
+              
+              }).call(this);
+              
+            </script></main> <hr> <p> 間違いを見つけた場合や、ご意見・ご指摘は<a href="https://github.com/raccy/raccy.github.io.middleman/issues">GitHubレポジトリIssues</a>へお願いします。 </p> </div> </div> </div> <footer> <hr> <div class=container> <p><a href="/plain/LICENSE.html"> MIT / CC-BY © 2014-2015 raccy</a> </p> </div> </footer> </body> </html>
