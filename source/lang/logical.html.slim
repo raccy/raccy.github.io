@@ -1,0 +1,136 @@
+---
+title: 論理学？
+---
+div
+  h3 A & B
+  canvas#ab0 width="400" height="200"
+  h3 A | B
+  canvas#ab1 width="400" height="200"
+  h3 A ^ B
+  canvas#ab2 width="400" height="200"
+
+coffee:
+  class CircleDraw
+    constructor: (@context, @width, @height, @r) ->
+      @len = @r
+
+    clear: ->
+      @context.clearRect(0, 0, @width, @height)
+
+    draw_circle: (x, y, r, color = '#000000') ->
+      @context.beginPath()
+      @context.arc(x, y, r, 0, Math.PI * 2)
+      @context.strokStyle = color
+      @context.stroke()
+      @context.closePath()
+
+    draw_text: (x, y, text, size, color = '#000000') ->
+      @context.beginPath()
+      @context.font = "#{size}px sans-serif"
+      @context.textAlign = "center"
+      @context.textBaseline = "middle"
+      @context.fillStyle = color
+      @context.fillText(text, x, y)
+      @context.closePath()
+
+    draw_fill: (color, func) ->
+      @context.beginPath()
+      func(@)
+      @context.fillStyle = color
+      @context.fill()
+      @context.closePath()
+
+    loop: (msec, func) ->
+      func(@)
+      setTimeout =>
+        @loop(msec, func)
+      , msec
+
+    next_len: ->
+      @len--
+      if @len < 0
+        @len = @r
+  $ ->
+    e_ab0 = $("#ab0")[0]
+    ctx_ab0 = e_ab0.getContext("2d")
+    cd_ab0 = new CircleDraw(ctx_ab0, e_ab0.clientWidth, e_ab0.clientHeight,
+        e_ab0.clientWidth / 4)
+    cd_ab0.loop 50, (cd) ->
+      cd.clear()
+      cd.draw_fill '#0000D0', (cd) ->
+        cd.context.arc(cd.width / 2 - cd.len,
+                       cd.height / 2,
+                       cd.r,
+                       0 - Math.acos(cd.len/cd.r),
+                       0 + Math.acos(cd.len/cd.r))
+        cd.context.arc(cd.width / 2 + cd.len,
+                       cd.height / 2,
+                       cd.r,
+                       Math.PI - Math.acos(cd.len/cd.r),
+                       Math.PI + Math.acos(cd.len/cd.r))
+      cd.draw_circle(cd.width / 2 - cd.len, cd.height / 2, cd.r)
+      cd.draw_circle(cd.width / 2 + cd.len, cd.height / 2, cd.r)
+      cd.draw_text(cd.width / 2 - cd.len - 60, cd.height / 2, "A", 60)
+      cd.draw_text(cd.width / 2 + cd.len + 60, cd.height / 2, "B", 60)
+      cd.next_len()
+
+    e_ab1 = $("#ab1")[0]
+    ctx_ab1 = e_ab1.getContext("2d")
+    cd_ab1 = new CircleDraw(ctx_ab1, e_ab1.clientWidth, e_ab1.clientHeight,
+        e_ab1.clientWidth / 4)
+    cd_ab1.loop 50, (cd) ->
+      cd.clear()
+      cd.draw_fill '#00D000', (cd) ->
+        cd.context.arc(cd.width / 2 - cd.len,
+                       cd.height / 2,
+                       cd.r,
+                       0 - Math.acos(cd.len/cd.r),
+                       0 + Math.acos(cd.len/cd.r),
+                       true)
+        cd.context.arc(cd.width / 2 + cd.len,
+                       cd.height / 2,
+                       cd.r,
+                       Math.PI - Math.acos(cd.len/cd.r),
+                       Math.PI + Math.acos(cd.len/cd.r),
+                       true)
+      cd.draw_circle(cd.width / 2 - cd.len, cd.height / 2, cd.r)
+      cd.draw_circle(cd.width / 2 + cd.len, cd.height / 2, cd.r)
+      cd.draw_text(cd.width / 2 - cd.len - 60, cd.height / 2, "A", 60)
+      cd.draw_text(cd.width / 2 + cd.len + 60, cd.height / 2, "B", 60)
+      cd.next_len()
+
+    e_ab2 = $("#ab2")[0]
+    ctx_ab2 = e_ab2.getContext("2d")
+    cd_ab2 = new CircleDraw(ctx_ab2, e_ab2.clientWidth, e_ab2.clientHeight,
+        e_ab2.clientWidth / 4)
+    cd_ab2.loop 50, (cd) ->
+      cd.clear()
+      cd.draw_fill '#D00000', (cd) ->
+        cd.context.arc(cd.width / 2 - cd.len,
+                       cd.height / 2,
+                       cd.r,
+                       0 - Math.acos(cd.len/cd.r),
+                       0 + Math.acos(cd.len/cd.r),
+                       true)
+        cd.context.arc(cd.width / 2 + cd.len,
+                       cd.height / 2,
+                       cd.r,
+                       Math.PI - Math.acos(cd.len/cd.r),
+                       Math.PI + Math.acos(cd.len/cd.r))
+      cd.draw_fill '#D00000', (cd) ->
+        cd.context.arc(cd.width / 2 - cd.len,
+                       cd.height / 2,
+                       cd.r,
+                       0 - Math.acos(cd.len/cd.r),
+                       0 + Math.acos(cd.len/cd.r))
+        cd.context.arc(cd.width / 2 + cd.len,
+                       cd.height / 2,
+                       cd.r,
+                       Math.PI - Math.acos(cd.len/cd.r),
+                       Math.PI + Math.acos(cd.len/cd.r),
+                       true)
+      cd.draw_circle(cd.width / 2 - cd.len, cd.height / 2, cd.r)
+      cd.draw_circle(cd.width / 2 + cd.len, cd.height / 2, cd.r)
+      cd.draw_text(cd.width / 2 - cd.len - 60, cd.height / 2, "A", 60)
+      cd.draw_text(cd.width / 2 + cd.len + 60, cd.height / 2, "B", 60)
+      cd.next_len()
