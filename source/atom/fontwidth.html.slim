@@ -1,0 +1,47 @@
+---
+title: フォント幅確認
+fontlist:
+  - Tiems New Roman
+  - monospace
+---
+div
+  p "All your package are belong to us."
+  h3 Georgia
+  canvas#cbserif width="400" height="100"
+  h3 Courier New
+  canvas#cbmono width="400" height="100"
+  h3 Noto
+  canvas#cbnoto width="400" height="100"
+
+coffee:
+  font_size = 14
+  text0 = "00000000001111111111222222222233333333334444444444"
+  text1 = "01234567890123456789012345678901234567890123456789"
+  textx = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+  text = "All your package are belong to us."
+
+  canvas_serif = $('#cbserif')[0]
+  canvas_mono = $('#cbmono')[0]
+  ctx_serif = canvas_serif.getContext("2d")
+  ctx_mono = canvas_mono.getContext("2d")
+  ctx_serif.font = "#{font_size}px Georgia"
+  ctx_mono.font = "#{font_size}px 'Courier New'"
+  
+  ctx_serif.fillText(text0, 0, 20)
+  ctx_serif.fillText(text1, 0, 40)
+  ctx_serif.fillText(textx, 0, 60)
+  ctx_serif.fillText(text, 0, 80)
+  ctx_mono.fillText(text0, 0, 20)
+  ctx_mono.fillText(text1, 0, 40)
+  ctx_mono.fillText(textx, 0, 60)
+  ctx_mono.fillText(text, 0, 80)
+
+  text = "君達のパッケージは、全てGitHubがいただいた。"
+  canvas_noto = $('#cbnoto')[0]
+  ctx_noto = canvas_noto.getContext("2d")
+  ctx_noto.font = "#{font_size}px 'Noto Sans CJK JP'"
+
+  ctx_noto.fillText(text0, 0, 20)
+  ctx_noto.fillText(text1, 0, 40)
+  ctx_noto.fillText(textx, 0, 60)
+  ctx_noto.fillText(text, 0, 80)
